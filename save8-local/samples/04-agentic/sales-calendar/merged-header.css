@@ -1,0 +1,70 @@
+/* Selected destination and section hero are one continuous surface.
+   Swiggy/Instamart pattern: same geometry, header hue follows the active tab.
+   Agent8 = savings green, Gift Card = teal between them, Calendar = teal-green
+   (analogous hue shift off the savings-green anchor, H174 vs H154 - see
+   samples/03-section-tiles/header-styles for the colour comparison this came
+   from). No blue chrome, no orange chrome. */
+.calendar-merged{--calendar-chrome:#024b43;--calendar-hero:#03776c;--calendar-on-hero:#fff;--calendar-secondary:#d9f2f0;--page-content:880px}
+.calendar-merged:has(.section-agent[aria-current=page]){--calendar-chrome:#025332;--calendar-hero:#037845;--calendar-secondary:#d4f0e2}
+.calendar-merged:has(.section-gift[aria-current=page]){--calendar-chrome:#0a3f3c;--calendar-hero:#156a64;--calendar-secondary:#d4eeeb}
+.calendar-merged:has(.section-calendar[aria-current=page]){--calendar-chrome:#024b43;--calendar-hero:#03776c;--calendar-secondary:#d9f2f0}
+html[data-theme=dark] .calendar-merged:has(.section-agent[aria-current=page]){--calendar-chrome:#063322;--calendar-hero:#0a5c38;--calendar-secondary:#d4f0e2}
+html[data-theme=dark] .calendar-merged:has(.section-gift[aria-current=page]){--calendar-chrome:#072624;--calendar-hero:#0e4a46;--calendar-secondary:#d4eeeb}
+html[data-theme=dark] .calendar-merged:has(.section-calendar[aria-current=page]){--calendar-chrome:#052c28;--calendar-hero:#0a5c54;--calendar-secondary:#d9f2f0}
+.calendar-merged .product-header{background:var(--calendar-chrome);border:0;border-radius:0;box-shadow:none;overflow:hidden}
+.calendar-merged .product-header .nav,.calendar-merged .section-navigation{background:transparent}
+.calendar-merged .section-navigation{padding:2px 12px 0}
+.calendar-merged .section-rail-wrap{max-width:1176px}
+.calendar-merged .section-rail{gap:12px;padding:4px 12px 0;align-items:flex-end;scrollbar-width:none;scroll-padding-inline:12px}
+.calendar-merged .section-rail::-webkit-scrollbar{display:none}
+/* The 3 fixed-width destination tiles never come close to filling the
+   1176px rail on desktop - flex-start left them stranded on the left third
+   of the header with dead space to the right. Centering only kicks in once
+   the mobile/tablet breakpoint (which grows tiles to fill the row and can
+   need horizontal scroll) is past. */
+@media(min-width:1024px){.calendar-merged .section-rail{justify-content:center}}
+.calendar-merged .section-tile{flex:0 0 160px;min-height:64px;max-width:none;margin:0 0 8px;border-radius:16px;border:1px solid rgba(255,255,255,.14);flex-direction:row;gap:8px;background:rgba(255,255,255,.045);color:var(--calendar-secondary);box-shadow:none;padding:10px 12px;isolation:auto}
+.calendar-merged .section-tile svg{width:22px;height:22px;flex-shrink:0}
+.calendar-merged .section-tile .tile-name{font-size:18px;line-height:1.12;letter-spacing:-.35px;text-align:left;white-space:normal}
+.calendar-merged .section-tile.section-agent .tile-name{font-size:25px;letter-spacing:-.8px}
+.calendar-merged .tile-line{display:block}
+.calendar-merged .section-tile .agent-eight{color:inherit}
+.calendar-merged .section-tile[aria-current=page]{background:linear-gradient(135deg,color-mix(in srgb,var(--calendar-hero) 100%,#fff 22%) 0%,var(--calendar-hero) 70%);color:var(--calendar-on-hero);border-color:transparent;min-height:76px;box-shadow:none;border-radius:18px 18px 0 0;margin:0;padding:12px 12px 16px;z-index:1}
+.calendar-merged .section-tile[aria-current=page] svg{color:#fff}
+.calendar-merged .section-tile[aria-current=page] .tile-name{font-weight:800}
+.calendar-merged .section-tile[aria-current=page]:before,.calendar-merged .section-tile[aria-current=page]:after{content:'';display:block;position:absolute;bottom:0;width:16px;height:20px;background:transparent;transform:none;top:auto}
+.calendar-merged .section-tile[aria-current=page]:before{left:-16px;border-radius:0 0 16px 0;box-shadow:6px 6px 0 6px var(--calendar-hero)}
+.calendar-merged .section-tile[aria-current=page]:after{left:auto;right:-16px;border-radius:0 0 0 16px;box-shadow:-6px 6px 0 6px var(--calendar-hero)}
+.calendar-merged .section-tile:not([aria-current=page]):hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
+.calendar-merged .section-tile:focus-visible{outline:2px solid #fff;outline-offset:-5px}
+.calendar-header-content{max-width:none;padding:24px max(24px,calc((100% - var(--page-content))/2)) 8px;margin:0;background:var(--calendar-hero);color:var(--calendar-on-hero);position:relative;z-index:2}
+.calendar-header-content h1{font-size:32px;line-height:1.15;letter-spacing:-.5px;font-weight:700;margin:0;color:var(--calendar-on-hero)}
+.calendar-header-content .page-intro{margin:0 0 24px}
+.calendar-header-content .page-intro h1{color:var(--calendar-on-hero)}
+.calendar-header-content .page-intro>p{color:var(--calendar-secondary)}
+.calendar-header-content .filter{background:transparent;border-color:rgba(255,255,255,.25);color:var(--calendar-secondary)}
+.calendar-header-content .filter[aria-pressed=true]{background:#fff;color:var(--calendar-chrome);border-color:#fff}
+.calendar-header-content .toolbar{margin-bottom:18px}
+.calendar-header-content .search{border-color:transparent;background:#fff;color:#6a6c6a}
+.calendar-header-content .search input{color:#0e0f0c}.calendar-header-content .search input::placeholder{color:#6a6c6a}
+.calendar-header-content #saved-filter{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff}
+.calendar-header-content #saved-filter[aria-pressed=true]{background:#fff;color:var(--calendar-chrome)}
+.calendar-merged main.wrap{padding-top:22px}
+.calendar-merged main.wrap.agenda-main,.calendar-merged main.wrap.gift-main{max-width:calc(var(--page-content) + 48px)}
+.calendar-merged .rail-arrow{background:#fff;color:var(--calendar-chrome)}
+.calendar-merged .btn.primary.login{background:#fff;border-color:#fff;color:var(--calendar-chrome)}
+.calendar-header-content.blank-section{min-height:36px;padding:0}
+@media(max-width:1023px){.calendar-merged .section-navigation{padding:2px 4px 0}.calendar-merged .section-rail{gap:10px}.calendar-merged .section-tile{flex:1 0 104px;min-height:56px;border-radius:14px;padding:8px 7px;gap:6px}.calendar-merged .section-tile[aria-current=page]{min-height:68px;border-radius:16px 16px 0 0;padding:10px 7px 14px}.calendar-header-content{padding:24px 16px 4px}.calendar-merged .product-header{border-radius:0}.calendar-header-content h1{font-size:27px}.calendar-header-content .page-intro{margin-bottom:20px}}
+@media(max-width:1023px){.calendar-merged .section-tile .tile-name{font-size:16px}.calendar-merged .section-tile.section-agent .tile-name{font-size:22px}.calendar-merged .section-tile svg{width:18px;height:18px}}
+@media(max-width:400px){.calendar-merged .section-rail{gap:8px}.calendar-merged .section-tile{flex-basis:98px}.calendar-header-content .section-head{align-items:center}.calendar-header-content .section-head .btn{padding:10px;font-size:12px}}
+/* The three primary destinations fit the mobile header without scroll controls. */
+@media(max-width:700px){
+  .calendar-merged .section-rail{gap:8px;overflow-x:clip}
+  .calendar-merged .section-tile{flex:1 1 0;min-width:0;padding-left:5px;padding-right:5px;gap:4px}
+  .calendar-merged .section-tile[aria-current=page]{padding-left:5px;padding-right:5px}
+  .calendar-merged .section-tile .tile-name{font-size:14px}
+  .calendar-merged .section-tile.section-agent .tile-name{font-size:clamp(16px,5vw,20px)}
+  .calendar-merged .section-tile svg{width:16px;height:16px}
+  .calendar-merged .section-navigation .rail-arrow{display:none}
+}
+@media(max-width:700px){.calendar-merged .section-tile:last-child[aria-current=page]:after{right:-12px;width:12px}}

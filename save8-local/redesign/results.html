@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Price Comparison · Save8</title>
+<script>
+  try {
+    const saved = JSON.parse(localStorage.getItem("save8-prototype-theme"));
+    document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  } catch { document.documentElement.dataset.theme = "light"; }
+</script>
+<link rel="preload" href="../samples/04-agentic/shared/assets/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../samples/04-agentic/shared/assets/league-spartan.woff2" as="font" type="font/woff2" crossorigin>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+@font-face{font-family:Inter;src:url(../samples/04-agentic/shared/assets/inter.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Spartan;src:url(../samples/04-agentic/shared/assets/league-spartan.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+/* Tokens. One accent (orange) for actions; green only for savings; amber only for warnings.
+   Radius rule: cards 18px, inner panels 12px, logos 10px, buttons/inputs/chips full pill. */
+:root{
+  --bg:#f7f4ed; --surface:#fffefb; --surface-2:#f1ede4; --ink:#0e0f0c; --body:#454745; --muted:#666865;
+  --line:rgba(14,15,12,.09); --line-strong:rgba(14,15,12,.16);
+  --accent:#c25410; --accent-ink:#fffefb;
+  --save:#037845; --save-bg:rgba(3,120,69,.09);
+  --warn:#8a5a00; --warn-bg:rgba(184,124,0,.12);
+  --deep:#063322; --deep-ink:#f6f4ee; --deep-body:#cfe6da;
+  --shadow:0 1px 2px rgba(60,48,20,.05),0 12px 32px -14px rgba(60,48,20,.18);
+  --r-card:18px; --r-inner:12px; --r-logo:10px;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0c0a; --surface:#161814; --surface-2:#20221d; --ink:#f6f4ee; --body:#c4c1b8; --muted:#a3a097;
+  --line:rgba(246,244,238,.10); --line-strong:rgba(246,244,238,.2);
+  --accent:#f08a4b; --accent-ink:#1c0d03;
+  --save:#43d895; --save-bg:rgba(67,216,149,.11);
+  --warn:#f2c35b; --warn-bg:rgba(242,195,91,.12);
+  --deep:#0b4d30;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -20px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+h2{font:600 19px/1.25 Spartan,Inter,sans-serif;margin:0}
+
+/* Top bar */
+.topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1160px;margin:0 auto;height:60px;padding:0 16px;display:flex;align-items:center;gap:12px}
+.brand img{height:26px;width:auto}
+.icon-btn{margin-left:auto;width:40px;height:40px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);display:grid;place-items:center;cursor:pointer;font-size:18px}
+.icon-btn:hover{border-color:var(--ink)}
+
+.page{max-width:1160px;margin:0 auto;padding:20px 16px calc(112px + env(safe-area-inset-bottom))}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media(min-width:980px){.page{padding-top:28px}.layout{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:28px;align-items:start}}
+.col{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow)}
+
+/* Product */
+.product{padding:16px;display:grid;grid-template-columns:84px minmax(0,1fr);gap:14px;align-items:center}
+.product-img{width:84px;height:84px;border-radius:var(--r-inner);background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.product-img img{max-height:76px;width:auto}
+.product h1{font:600 18px/1.3 Inter,sans-serif;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{padding:3px 10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);font-size:12px;color:var(--body)}
+.source{grid-column:1 / -1;display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.source a{color:var(--ink);font-weight:500;text-decoration-color:var(--line-strong);text-underline-offset:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.sale{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;background:var(--save-bg);color:var(--save);font-size:11px;font-weight:600;white-space:nowrap}
+
+/* Answer */
+.answer{padding:20px;background:var(--deep);border-color:transparent;color:var(--deep-ink)}
+.answer .kicker{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--deep-body)}
+.answer .store{display:flex;align-items:center;gap:12px;margin-top:14px}
+.answer .store b{font-size:17px;font-weight:600}
+.logo{width:40px;height:40px;flex:none;border-radius:var(--r-logo);background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.logo img{width:80%;height:80%;object-fit:contain}
+.answer .price{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin-top:16px}
+.answer .price strong{font:700 44px/1 Spartan,Inter,sans-serif;letter-spacing:-.02em}
+.answer .price s{color:var(--deep-body);font-size:16px}
+.answer dl{margin:16px 0 0;padding:12px 14px;border-radius:var(--r-inner);background:rgba(255,255,255,.07)}
+.answer dl div{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-size:14px;color:var(--deep-body)}
+.answer dl dd{margin:0}
+.answer dl .minus dd{color:#7fe0b0;font-weight:500}
+.answer dl .total{margin-top:6px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.2);color:var(--deep-ink);font-weight:600}
+.answer .actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.answer .hint{display:flex;gap:8px;margin:14px 0 0;font-size:13px;color:var(--deep-body)}
+.answer .hint i{margin-top:2px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;cursor:pointer;border:1px solid transparent;transition:transform .2s cubic-bezier(.16,1,.3,1),background-color .2s,border-color .2s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:color-mix(in srgb,var(--accent) 86%,#000)}
+.btn-ghost{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink)}
+.answer .btn-primary{background:#f08a4b;color:#1c0d03}
+.answer .btn-primary:hover{background:#f39d66}
+.answer .btn-ghost{border-color:rgba(255,255,255,.3);color:var(--deep-ink)}
+.answer .btn-ghost:hover{border-color:var(--deep-ink)}
+.btn-sm{min-height:36px;padding:0 14px;font-size:13px}
+
+/* Offers on source store */
+.offers{padding:18px}
+.offers > p{margin:4px 0 0;font-size:14px;color:var(--body)}
+.offer-group{margin-top:16px}
+.offer-group h3{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px;font-size:14px;font-weight:600}
+.offer-group h3 a{font-size:13px;font-weight:500;color:var(--muted);text-underline-offset:3px}
+.rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:thin}
+.tile{flex:0 0 auto;width:168px;scroll-snap-align:start;padding:12px;border-radius:var(--r-inner);border:1px solid var(--line);background:var(--surface-2);display:grid;gap:8px}
+.tile .logo{width:32px;height:32px}
+.tile strong{font-size:13px;font-weight:600;line-height:1.3;min-height:2.6em}
+.tile .rate{font:700 20px/1 Spartan,Inter,sans-serif;color:var(--save)}
+.tile small{font-size:12px;color:var(--muted)}
+.tile.best{border-color:color-mix(in srgb,var(--save) 45%,transparent)}
+.note{display:flex;gap:8px;margin:14px 0 0;font-size:13px;color:var(--body)}
+.note i{color:var(--muted);margin-top:2px}
+
+/* Store list */
+.stores{padding:16px 6px 6px}
+.stores-head{padding:2px 12px 0;display:grid;gap:4px}
+.stores-head p{margin:0;font-size:14px;color:var(--body)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;padding:12px 12px 10px}
+.toggle{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;font-size:13px;font-weight:500;cursor:pointer}
+.toggle[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cols{display:flex;justify-content:space-between;padding:8px 12px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line)}
+.list{list-style:none;margin:0;padding:0}
+.row + .row{border-top:1px solid var(--line)}
+.row-main{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 12px}
+.row-name{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-weight:600}
+.row-sub{display:block;margin-top:2px;font-size:13px;color:var(--muted)}
+.row-sub s{text-decoration:line-through}
+.row-sub b{color:var(--save);font-weight:500}
+.row-price{text-align:right;display:grid;justify-items:end;gap:2px}
+.row-price strong{font-size:17px;font-weight:600}
+.row-price span{font-size:12px;color:var(--muted)}
+.row.is-best .row-price strong{color:var(--save)}
+.pill-best{padding:2px 8px;border-radius:999px;background:var(--save-bg);color:var(--save);font-size:11px;font-weight:600}
+.row.oos .logo,.row.oos .row-price strong{opacity:.55}
+.oos-tag{padding:2px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);font-size:11px;font-weight:600}
+.row a.go{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;text-decoration:none;color:var(--accent)}
+.row a.go:hover{text-decoration:underline}
+.loc{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;font-size:12px;font-weight:600;cursor:pointer}
+.loc:hover{border-color:var(--ink)}
+.subhead{margin:0;padding:16px 12px 6px;font-size:12px;font-weight:600;color:var(--muted);border-top:1px solid var(--line)}
+
+/* More listings */
+.more{padding:6px}
+.more summary{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 12px;cursor:pointer;border-radius:var(--r-inner)}
+.more summary::-webkit-details-marker{display:none}
+.more summary:hover{background:var(--surface-2)}
+.more summary .t{display:grid;gap:2px}
+.more summary b{font-weight:600}
+.more summary span{font-size:13px;color:var(--muted)}
+.more summary i.chev{margin-left:auto;color:var(--muted);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.more[open] summary i.chev{transform:rotate(180deg)}
+.flag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;background:var(--warn-bg);color:var(--warn);font-size:11px;font-weight:600;white-space:nowrap}
+.listing-title{display:block;margin-top:2px;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Bottom search dock */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:15;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.dock form{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:5px 5px 5px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong)}
+.dock form:focus-within{border-color:var(--accent)}
+.dock i.ph-link{color:var(--muted);font-size:18px}
+.dock input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:16px;padding:9px 0}
+.dock input::placeholder{color:var(--muted)}
+.dock button{width:42px;height:42px;border-radius:999px;border:0;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;cursor:pointer;font-size:18px}
+.dock .err{max-width:720px;margin:6px auto 0;padding-left:16px;font-size:13px;color:var(--warn);min-height:0}
+.dock .err:empty{display:none}
+
+.foot{margin:24px 0 0;text-align:center;font-size:12px;color:var(--muted)}
+
+@media(max-width:420px){
+  .answer .price strong{font-size:38px}
+  .answer .actions .btn{flex:1}
+}
+@media (prefers-reduced-motion:no-preference){
+  .rise{animation:rise .55s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){.btn,.more summary i.chev{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html" aria-label="Save8 home"><img src="../samples/04-agentic/shared/assets/save8-logo.webp" alt="Save8"></a>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch light or dark theme"></button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="layout">
+    <div class="col">
+      <section class="card product rise" style="--i:0" aria-label="Product you searched">
+        <div class="product-img"><img src="https://m.media-amazon.com/images/I/71657TiFeHL._SL1100_.jpg" alt="Apple iPhone 15 in black" onerror="this.remove()"></div>
+        <div>
+          <h1>Apple iPhone 15 (128 GB) - Black</h1>
+          <div class="chips"><span class="chip">128 GB</span><span class="chip">Black</span></div>
+        </div>
+        <div class="source">
+          <span>From your link:</span>
+          <a href="https://www.amazon.in/dp/B0CHX1W1XY" rel="noopener">amazon.in/dp/B0CHX1W1XY</a>
+          <span class="sale">Great Indian Festival</span>
+        </div>
+      </section>
+
+      <section class="card answer rise" style="--i:1" aria-labelledby="answer-title" id="answer"></section>
+
+      <section class="card offers rise" style="--i:2" aria-labelledby="offers-title">
+        <h2 id="offers-title">Offers if you buy on Amazon</h2>
+        <p>Amazon's price couldn't be confirmed, so savings are shown as rates.</p>
+        <div class="offer-group">
+          <h3>Gift cards <a href="https://www.save8.ai/gift-cards">All gift cards</a></h3>
+          <div class="rail" id="gift-rail"></div>
+        </div>
+        <div class="offer-group">
+          <h3>Card offers <a href="#">Add your cards</a></h3>
+          <div class="rail" id="card-rail"></div>
+        </div>
+        <p class="note"><i class="ph ph-info" aria-hidden="true"></i><span>Amazon Prime gift cards don't lower the price. They're for buying a membership.</span></p>
+      </section>
+    </div>
+
+    <div class="col">
+      <section class="card stores rise" style="--i:3" aria-labelledby="stores-title">
+        <div class="stores-head">
+          <h2 id="stores-title">Prices for the same product</h2>
+          <p id="stores-summary"></p>
+        </div>
+        <div class="filters" role="group" aria-label="Filter stores">
+          <button class="toggle" type="button" id="stock-toggle" aria-pressed="true"><i class="ph ph-package" aria-hidden="true"></i>In stock only</button>
+        </div>
+        <div class="cols" aria-hidden="true"><span>Store</span><span>After offers</span></div>
+        <ul class="list num" id="store-list"></ul>
+      </section>
+
+      <details class="card more rise" style="--i:4">
+        <summary>
+          <span class="logo" style="background:var(--warn-bg);border-color:transparent"><i class="ph-bold ph-warning" style="color:var(--warn);font-size:18px" aria-hidden="true"></i></span>
+          <span class="t"><b id="more-title"></b><span>Different colour, missing details or prices that look wrong. Check before buying.</span></span>
+          <i class="ph ph-caret-down chev" aria-hidden="true"></i>
+        </summary>
+        <ul class="list num" id="more-list"></ul>
+      </details>
+    </div>
+  </div>
+  <p class="foot">Design preview. Prices are a snapshot of a real save8.ai result from 12 Oct 2026 and may have changed.</p>
+</main>
+
+<div class="dock">
+  <form id="new-search" novalidate>
+    <i class="ph ph-link" aria-hidden="true"></i>
+    <label class="sr-only" for="new-url">Paste a new product link</label>
+    <input id="new-url" type="url" inputmode="url" placeholder="Paste a new product link" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="new-err">
+    <button type="submit" aria-label="Compare prices"><i class="ph-bold ph-arrow-up" aria-hidden="true"></i></button>
+  </form>
+  <p class="err" id="new-err" role="alert"></p>
+</div>
+
+<script>
+// Snapshot of a live save8.ai result (amazon.in/dp/B0CHX1W1XY), captured 12 Oct 2026.
+// "off" is the extra saving save8.ai reported for each store; "kind" says where it comes from.
+const LOGO = d => `https://img.logo.dev/${d}?token=pk_dhi2cgouS1qZnXvk9nhPzQ`;
+const STORES = [
+  { name: "Vijay Sales", domain: "vijaysales.com", price: 59900, off: 1198, kind: "gift card + card", sale: "Grand Electronics Sale" },
+  { name: "Great Eastern Retail", domain: "greateasternretail.com", price: 64900, off: 3245, kind: "card" },
+  { name: "Imagine", domain: "imagineonline.store", price: 74900, off: 3745, kind: "card" },
+  { name: "Poorvika", domain: "poorvika.com", price: 74900, off: 3745, kind: "card" },
+  { name: "Vasanth & Co", domain: "vasanthandco.in", price: 74900, off: 3745, kind: "card" },
+  { name: "Croma", domain: "croma.com", price: 74900, off: 1685, kind: "gift card + card", sale: "Festival of Dreams" },
+  { name: "BigBasket", domain: "bigbasket.com", price: null, off: 2396, kind: "gift card + card", needsLocation: true },
+  { name: "Zepto", domain: "zepto.com", price: 56900, off: 2276, kind: "gift card + card", oos: true },
+  { name: "Swiggy Instamart", domain: "instamart.in", price: 59900, off: 2995, kind: "card", oos: true, sale: "Quick India Movement" },
+  { name: "Reliance Digital", domain: "reliancedigital.in", price: 59900, off: 599, kind: "gift card + card", oos: true, sale: "Festival of Electronics" },
+];
+const MORE = [
+  { name: "Inspireonline", domain: "inspireonline.in", price: 64900, off: 3245, title: "iPhone 15 128GB Black", flag: "Unverified match" },
+  { name: "iPlanet", domain: "iplanet.one", price: 57504, off: 2875, title: "Buy the iPhone 15 128GB Black at ...", flag: "Out of stock" },
+  { name: "Sathya Mobiles", domain: "sathyamobiles.com", price: 54900, off: 2745, title: "Apple iPhone 15 128GB Pink", flag: "Pink, not Black" },
+  { name: "iVenus", domain: "ivenus.in", price: 66900, off: 3345, title: "iPhone 15", flag: "Storage and colour not listed" },
+  { name: "Flipkart", domain: "flipkart.com", price: 67999, off: 1360, title: "Apple iPhone 15", flag: "Blue, not Black" },
+  { name: "Girias", domain: "giriasindia.com", price: 89900, off: 1798, title: "Mobiles, Laptops & Accessories", flag: "Pink, not Black" },
+  { name: "Bigcmobiles", domain: "bigcmobiles.com", price: null, title: "iPhone 15 128GB Black", flag: "Price on store site" },
+  { name: "Myg", domain: "myg.in", price: null, title: "Apple iPhone 15 | 128GB | Black", flag: "Price on store site" },
+  { name: "Sathya", domain: "sathya.store", price: null, title: "apple iphone 15 128gb blue", flag: "Blue, not Black" },
+  { name: "Shopsy", domain: "shopsy.in", price: 5000, title: "Apple iPhone 15 (6GB/128GB)", flag: "Price looks wrong" },
+  { name: "Jio Mart", domain: "jiomart.com", price: 22999, title: "Apple iPhone 15 128GB Black", flag: "Price looks wrong" },
+];
+const GIFTS = [
+  { name: "Amazon Fresh", img: "https://assets.myhubble.money/brand-assets/tile-images-wp/amazon-fresh-tile.webp", rate: 2 },
+  { name: "Amazon shopping", img: "https://assets.myhubble.money/brand-assets/icon-images/Icon_Amazon%20Shopping.png", rate: 1.75 },
+  { name: "Amazon Pay", img: "https://assets.myhubble.money/brand-assets/tile-images-wp/amazon-pay-tile.webp", rate: 1.25 },
+];
+const CARDS = [
+  { name: "Amazon Pay ICICI Card", img: "https://assets.save8.ai/images/brands/cc-issuers/icici/small.webp", rate: "5% / 3%", note: "Higher rate for Prime members" },
+  { name: "Cashback SBI Card", img: "https://assets.save8.ai/images/brands/cc-issuers/sbi-card/small.webp", rate: "5%" },
+  { name: "StanC Smart Credit Card", img: "https://assets.save8.ai/images/brands/cc-issuers/standard-chartered/small.webp", rate: "2%" },
+  { name: "Axis ACE Credit Card", img: "https://assets.save8.ai/images/brands/cc-issuers/axis/small.webp", rate: "1.5%" },
+  { name: "YES Klick (Kiwi) Credit Card", img: null, rate: "1.5%" },
+];
+
+const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const logo = (src, alt = "") => `<span class="logo">${src ? `<img src="${src}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">` : '<i class="ph ph-credit-card" aria-hidden="true"></i>'}</span>`;
+
+const priced = STORES.filter(s => s.price).map(s => ({ ...s, total: s.price - s.off }));
+const inStock = priced.filter(s => !s.oos).sort((a, b) => a.total - b.total);
+const outStock = priced.filter(s => s.oos).sort((a, b) => a.total - b.total);
+const best = inStock[0];
+const cheapestOos = outStock[0];
+
+// Answer card
+document.getElementById("answer").innerHTML = `
+  <div class="kicker"><i class="ph-fill ph-seal-check" aria-hidden="true"></i><span id="answer-title">Lowest price in stock</span></div>
+  <div class="store">${logo(LOGO(best.domain))}<b>${esc(best.name)}</b>${best.sale ? `<span class="sale" style="background:rgba(127,224,176,.16);color:#7fe0b0">${esc(best.sale)}</span>` : ""}</div>
+  <div class="price num"><strong>${inr(best.total)}</strong><s><span class="sr-only">Store price </span>${inr(best.price)}</s></div>
+  <dl class="num">
+    <div><dt>${esc(best.name)} price</dt><dd>${inr(best.price)}</dd></div>
+    <div class="minus"><dt>Gift card and card rewards</dt><dd>−${inr(best.off)}</dd></div>
+    <div class="total"><dt>You pay</dt><dd>${inr(best.total)}</dd></div>
+  </dl>
+  <div class="actions">
+    <a class="btn btn-primary" href="https://www.${best.domain}" rel="noopener">Open ${esc(best.name)}<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+    <a class="btn btn-ghost" href="https://www.save8.ai/gift-cards">Gift card offers</a>
+  </div>
+  ${cheapestOos && cheapestOos.total < best.total ? `<p class="hint"><i class="ph ph-bell" aria-hidden="true"></i><span>${esc(cheapestOos.name)} would be ${inr(cheapestOos.total)} but is out of stock right now.</span></p>` : ""}`;
+
+// Offers on the source store
+const tile = (o, extra = "") => `<div class="tile${extra}">${logo(o.img, o.name)}<strong>${esc(o.name)}</strong><span class="rate">${typeof o.rate === "number" ? o.rate + "%" : esc(o.rate)} off</span>${o.note ? `<small>${esc(o.note)}</small>` : ""}</div>`;
+document.getElementById("gift-rail").innerHTML = GIFTS.map((g, i) => tile(g, i === 0 ? " best" : "")).join("");
+document.getElementById("card-rail").innerHTML = CARDS.map((c, i) => tile(c, i === 0 ? " best" : "")).join("");
+
+// Store list
+const list = document.getElementById("store-list");
+const stockBtn = document.getElementById("stock-toggle");
+const locStores = STORES.filter(s => s.needsLocation);
+function row(s, i) {
+  const isBest = s === best;
+  const diff = s.total - best.total;
+  return `<li class="row${isBest ? " is-best" : ""}${s.oos ? " oos" : ""}">
+    <div class="row-main">
+      ${logo(LOGO(s.domain), s.name)}
+      <div>
+        <span class="row-name">${esc(s.name)}${isBest ? '<span class="pill-best">Best</span>' : ""}${s.oos ? '<span class="oos-tag">Out of stock</span>' : ""}${s.sale && !s.oos ? `<span class="sale">${esc(s.sale)}</span>` : ""}</span>
+        <span class="row-sub">Store price <s>${inr(s.price)}</s> · <b>−${inr(s.off)}</b> with ${esc(s.kind)}</span>
+      </div>
+      <div class="row-price">
+        <strong>${inr(s.total)}</strong>
+        <span>${isBest ? "Lowest" : s.oos ? "Unavailable" : "+" + inr(diff)}</span>
+        ${s.oos ? "" : `<a class="go" href="https://www.${s.domain}" rel="noopener" aria-label="Open ${esc(s.name)}">Open<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>`}
+      </div>
+    </div>
+  </li>`;
+}
+function locRow(s) {
+  return `<li class="row">
+    <div class="row-main">
+      ${logo(LOGO(s.domain), s.name)}
+      <div><span class="row-name">${esc(s.name)}</span><span class="row-sub">Up to <b>−${inr(s.off)}</b> with ${esc(s.kind)}</span></div>
+      <div class="row-price"><button class="loc" type="button" data-loc><i class="ph ph-map-pin" aria-hidden="true"></i>Show price</button><span>Needs your location</span></div>
+    </div>
+  </li>`;
+}
+function renderStores() {
+  const onlyStock = stockBtn.getAttribute("aria-pressed") === "true";
+  let html = inStock.map(row).join("") + locStores.map(locRow).join("");
+  if (!onlyStock && outStock.length) html += `<li><p class="subhead">Out of stock</p></li>` + outStock.map(row).join("");
+  list.innerHTML = html;
+}
+stockBtn.addEventListener("click", () => {
+  stockBtn.setAttribute("aria-pressed", String(stockBtn.getAttribute("aria-pressed") !== "true"));
+  renderStores();
+});
+list.addEventListener("click", e => {
+  const b = e.target.closest("[data-loc]");
+  if (b) { b.outerHTML = '<span class="row-sub">Location is needed on save8.ai</span>'; }
+});
+renderStores();
+document.getElementById("stores-summary").textContent =
+  `${inStock.length} stores in stock, from ${inr(best.total)} to ${inr(inStock[inStock.length - 1].total)} after offers. ${outStock.length} more are out of stock.`;
+
+// Lower-confidence listings
+document.getElementById("more-title").textContent = `${MORE.length} more listings to check`;
+document.getElementById("more-list").innerHTML = MORE.map(m => `
+  <li class="row">
+    <div class="row-main">
+      ${logo(LOGO(m.domain), m.name)}
+      <div style="min-width:0">
+        <span class="row-name">${esc(m.name)}<span class="flag"><i class="ph-bold ph-warning" aria-hidden="true"></i>${esc(m.flag)}</span></span>
+        <span class="listing-title">${esc(m.title)}</span>
+      </div>
+      <div class="row-price">
+        ${m.price ? `<strong>${inr(m.price - (m.off || 0))}</strong><span>${m.off ? "after offers" : "listed"}</span>` : `<span>Price not shown</span>`}
+        <a class="go" href="https://www.${m.domain}" rel="noopener" aria-label="Open ${esc(m.name)}">Open<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </li>`).join("");
+
+// New search: uses save8.ai's "save8.ai/<link>" route.
+const form = document.getElementById("new-search"), input = document.getElementById("new-url"), err = document.getElementById("new-err");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  let v = input.value.trim();
+  if (!v) { err.textContent = "Paste a product link to compare prices."; input.focus(); return; }
+  if (!/^https?:\/\//i.test(v)) v = "https://" + v;
+  let ok = false; try { ok = new URL(v).hostname.includes("."); } catch {}
+  if (!ok) { err.textContent = "That doesn't look like a link. Copy it from the store's product page."; input.focus(); return; }
+  err.textContent = "";
+  location.href = "https://www.save8.ai/" + v;
+});
+input.addEventListener("input", () => { err.textContent = ""; });
+
+// Theme toggle
+const themeBtn = document.getElementById("theme-toggle");
+const syncTheme = () => { themeBtn.innerHTML = `<i class="ph ${document.documentElement.dataset.theme === "dark" ? "ph-sun" : "ph-moon"}" aria-hidden="true"></i>`; };
+themeBtn.addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("save8-prototype-theme", JSON.stringify(next)); } catch {}
+  syncTheme();
+});
+syncTheme();
+</script>
+</body>
+</html>

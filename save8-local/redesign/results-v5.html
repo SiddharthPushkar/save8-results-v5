@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Save8 · Results v5</title>
+<meta name="description" content="Save8 results v5: Sony WH-1000XM5 from Amazon, with gift card, card and EMI offers and other stores. Built from Figma frame 488:7755.">
+<style>
+@font-face{font-family:Inter;src:url(assets-v5/fonts/inter.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --page:#F7F4ED; --surface:#fff; --photo:#F4F4F6;
+  --ink:#0E0F0C; --body:#454745; --muted:#6A6C6A; --muted-2:#596774;
+  --line:rgba(14,15,12,.12); --line-soft:rgba(14,15,12,.08); --tile-line:#E2E7EB;
+  --green:#007A45; --green-2:#007B49; --orange:#E6651A;
+  --chip:#D9E8FA; --chip-ink:#0F2D6F; --btn2:#D8E0F2; --link:#000B80;
+  --warn-bg:rgba(184,124,0,.14); --warn:#7A4F00; --neutral-bg:rgba(14,15,12,.07);
+  --r-card:20px; --r-tile:14px;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#e9e5dc;font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.35}
+img{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+/* Phone column */
+.app{max-width:430px;min-height:100vh;margin:0 auto;background:var(--page);display:flex;flex-direction:column;position:relative}
+@media(min-width:600px){.app{box-shadow:0 0 0 1px rgba(14,15,12,.08),0 30px 80px -30px rgba(14,15,12,.35)}}
+
+/* Header */
+.hdr{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--page);border-bottom:1px solid rgba(14,15,12,.10)}
+.circle-btn{width:40px;height:40px;border-radius:999px;background:#fff;border:0;display:grid;place-items:center;flex:none}
+.circle-btn svg{width:20px;height:20px}
+.loc{flex:1;min-width:0;text-align:left;display:flex;flex-direction:column;gap:1px}
+.loc .v{display:flex;align-items:center;gap:4px;font-weight:700;font-size:16px;line-height:22px}
+.loc .v svg{flex:none}
+.loc .h{font-size:12px;line-height:16px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Content */
+main{flex:1;padding:12px 8px 20px;display:flex;flex-direction:column;gap:12px}
+.bubble-row{display:flex;justify-content:flex-end;padding:4px 0 4px 48px}
+.bubble{background:#fff;border:1px solid rgba(14,15,12,.06);border-radius:20px 6px 20px 20px;padding:11px 16px;max-width:100%}
+.bubble a{display:block;font-size:13px;line-height:18px;color:var(--body);text-decoration:underline;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.heading{font-size:15px;font-weight:500;color:var(--body);padding:4px 8px 0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card)}
+
+/* Product + offers */
+.po{padding:10px 0;display:flex;flex-direction:column;gap:14px}
+.po > .sec{padding:0 10px}
+.po > .sec.prod{padding:0 0 14px;margin:0 10px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--line)}
+.prod-top{display:flex;gap:12px;align-items:flex-start}
+.prod-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.store-line{display:flex;align-items:center;gap:6px}
+.store-line img{width:20px;height:20px;border-radius:99px}
+.store-line b{font-size:15px;font-weight:600}
+.ptitle{font-size:16px;font-weight:600;line-height:21px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.photo{width:122px;height:122px;flex:none;border-radius:14px;background:var(--photo);display:grid;place-items:center;overflow:hidden}
+.photo img{width:88%;height:88%;object-fit:contain;mix-blend-mode:multiply}
+.price-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.price-row .p{font-size:22px;font-weight:700;line-height:28px}
+.deliv{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--muted);white-space:nowrap}
+.deliv b{font-weight:600;color:var(--body)}
+.deliv svg{flex:none}
+
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 8px;border-radius:999px;font-size:11px;font-weight:600;white-space:nowrap;background:var(--chip);color:var(--chip-ink)}
+.tag.pos{background:rgba(0,122,69,.12);color:#006B3C}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+.tag.neutral{background:var(--neutral-bg);color:var(--ink)}
+.tag svg{width:12px;height:12px}
+
+/* Section headers */
+.sh{display:flex;justify-content:space-between;align-items:center;padding:0 2px;margin-bottom:8px}
+.sh h3{font-size:14px;font-weight:600;color:var(--body)}
+.sh a,.sh button{display:inline-flex;align-items:center;gap:2px;font-size:12px;font-weight:500;color:var(--link)}
+.sh .chev{color:var(--muted)}
+
+/* Rails */
+.rail{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:-10px;padding-right:10px}
+.rail::-webkit-scrollbar{display:none}
+.rail > *{scroll-snap-align:start;flex:none}
+.rail.tagged{padding-top:10px;position:relative}
+
+/* Gift card tile (horizontal) */
+.gc{width:251px;display:flex;gap:10px;padding:8px;background:#fff;border:1px solid var(--tile-line);border-radius:12px}
+.gc .art{width:70px;height:78px;border-radius:8px;overflow:hidden;flex:none;border:1px solid rgba(14,15,12,.08)}
+.gc .art img{width:100%;height:100%;object-fit:cover}
+.gc .d{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.gc .m{font-size:12px;font-weight:600;line-height:16px;color:#172637;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.save-row{display:flex;align-items:center;gap:6px}
+.save{font-weight:700;color:var(--green-2);font-size:15px;line-height:20px;white-space:nowrap}
+.rate{font-size:10px;font-weight:600;line-height:13px;color:var(--green-2);background:rgba(0,123,73,.1);padding:2px 6px;border-radius:999px;white-space:nowrap}
+.btn2{display:flex;align-items:center;justify-content:center;height:32px;border-radius:999px;background:var(--btn2);color:var(--chip-ink);font-weight:600;font-size:13px;width:100%}
+.btn2:hover{background:#cbd6ee}
+
+/* Bank / EMI tile */
+.bo{width:250px;background:#fff;border:1px solid var(--tile-line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-align:left}
+.bo .body{display:flex;gap:8px;align-items:center;padding:10px}
+.bo .body img{width:22px;height:22px;border-radius:6px;flex:none;object-fit:cover}
+.bo .tx{min-width:0;display:flex;flex-direction:column}
+.bo .bn{font-size:11px;font-weight:500;color:var(--muted-2);line-height:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bo .foot{display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(217,232,250,.45);color:var(--chip-ink);font-size:11px;font-weight:500;line-height:14px}
+.bo .foot svg{width:20px;height:20px;flex:none}
+.bo:hover .foot{background:rgba(217,232,250,.75)}
+.mycard{position:absolute;left:10px;top:0;z-index:1;background:#fff;border-radius:999px}
+
+/* Summary */
+.summary{display:flex;align-items:center;border:1px solid rgba(0,122,69,.45);background:rgba(0,122,69,.06);border-radius:14px;padding:13px 0}
+.summary > div{flex:1;text-align:center}
+.summary .l{font-size:12px;color:var(--muted);line-height:15px}
+.summary .v{font-size:16px;font-weight:700;color:var(--green);line-height:19px;margin-top:4px}
+.summary .div{flex:none;width:1px;height:32px;background:rgba(0,122,69,.25)}
+.hide{display:flex;align-items:center;justify-content:center;gap:4px;font-size:14px;font-weight:500;color:var(--ink);padding:2px 0;width:100%}
+.hide svg{transition:transform .2s}
+.collapsed .hide svg{transform:rotate(180deg)}
+.collapsed .offers{display:none}
+
+/* Store list cards */
+.sc{padding:12px;display:flex;flex-direction:column;gap:10px}
+.sc-top{display:flex;gap:8px;align-items:center}
+.logo34{width:34px;height:34px;border-radius:99px;object-fit:cover;flex:none}
+.sc-name{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.sc-name .nr{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sc-name .nr b{font-size:15px;font-weight:700;line-height:18px}
+.sc-name .msg{font-size:12px;line-height:16px;color:var(--link)}
+.price-btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 14px;border-radius:999px;background:var(--orange);color:#fff;font-weight:700;font-size:15px;white-space:nowrap;flex:none}
+.price-btn:hover{background:#cf5813}
+.price-btn svg{width:14px;height:14px}
+.loc-btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 10px 0 12px;border-radius:999px;background:var(--btn2);color:var(--chip-ink);font-weight:600;font-size:13px;white-space:nowrap;flex:none}
+.loc-btn svg{width:16px;height:16px}
+.fpa{font-size:10px;line-height:12px;color:var(--muted);text-align:right;width:52px;flex:none}
+.save-line{display:flex;justify-content:center;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--green);padding:2px 0}
+.save-line b{font-weight:700}
+.sc .offers{display:flex;flex-direction:column;gap:14px;padding-top:2px}
+
+/* Other stores list */
+.os{padding:4px 12px}
+.os-row{display:flex;flex-direction:column;gap:12px;padding:14px 0}
+.os-row + .os-row{border-top:1px solid var(--line-soft)}
+.os-top{display:flex;gap:10px;align-items:center}
+.os-top .n{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.os-top .n b{font-size:15px;font-weight:600;line-height:20px}
+.see{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:10px 10px 10px 14px;border-radius:12px;background:rgba(0,122,69,.08);border:1px solid rgba(0,122,69,.35);width:100%;text-align:left}
+.see:hover{background:rgba(0,122,69,.12)}
+.see .l{font-size:12px;font-weight:500;color:var(--muted)}
+.see .r{display:flex;align-items:center;gap:6px}
+.see .r b{font-size:15px;font-weight:700;color:var(--green)}
+.see .pill{font-size:10px;font-weight:600;color:var(--green);background:rgba(0,122,69,.12);padding:2px 6px;border-radius:999px}
+
+/* Dock */
+.dock{position:sticky;bottom:0;padding:10px 12px calc(24px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--page) 75%,rgba(247,244,237,0))}
+.composer{display:flex;align-items:center;gap:10px;height:52px;padding:6px 6px 6px 16px;background:#fff;border:1px solid rgba(14,15,12,.08);border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.composer svg.link{flex:none;color:var(--muted)}
+.composer input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:15px}
+.composer input::placeholder{color:var(--muted)}
+.send{width:38px;height:38px;border-radius:999px;display:grid;place-items:center;background:var(--orange);opacity:.4;flex:none;transition:opacity .2s}
+.send.on{opacity:1}
+.send svg{width:18px;height:18px}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;padding:10px 14px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:340px;text-align:center}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hdr">
+    <button class="circle-btn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#0E0F0C" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    <button class="loc" id="locBtn" aria-label="Set your location">
+      <span class="v">Set your location<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="#0E0F0C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="h">For local stores, prices and delivery</span>
+    </button>
+    <button class="circle-btn" aria-label="More"><svg viewBox="0 0 24 24" fill="#0E0F0C"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+  </header>
+
+  <main>
+    <div class="bubble-row"><div class="bubble"><a href="https://www.amazon.in/dp/B09XS7JWHH" target="_blank" rel="noopener">https://www.amazon.in/dp/B09XS7JWHH</a></div></div>
+
+    <h2 class="heading">Found the best offers for Amazon</h2>
+
+    <section class="card po" id="amazonCard">
+      <div class="sec prod">
+        <div class="prod-top">
+          <div class="prod-info">
+            <div class="store-line"><img src="assets-v5/logos/stores/amazon.png" alt=""><b>Amazon</b><span class="tag pos" data-icon="sale">Sale live</span></div>
+            <p class="ptitle">Sony WH-1000XM5 Noise Cancelling Wireless Headphones</p>
+            <div class="tags"><span class="tag">Black</span><span class="tag">Wireless, Bluetooth</span><span class="tag">Active Noise Cancellation</span></div>
+          </div>
+          <div class="photo"><img src="assets-v5/products/sony-wh-1000xm5-black.jpg" alt="Sony WH-1000XM5, black"></div>
+        </div>
+        <div class="price-row"><span class="p num">₹26,999</span><span class="deliv" data-icon="truck">Delivery by <b>Thu, 16 Oct</b></span></div>
+      </div>
+
+      <div class="offers">
+        <div class="sec" style="padding:0 10px">
+          <div class="sh"><h3>Gift Card Offers</h3><span class="chev" data-icon="chev"></span></div>
+          <div class="rail" id="giftAmazon"></div>
+        </div>
+        <div class="sec" style="padding:14px 10px 0">
+          <div class="sh"><h3>Payment Offers</h3><a href="#" data-toast="Your saved cards would open here.">My Cards <span data-icon="chev"></span></a></div>
+          <div class="rail tagged" id="payAmazon"><span class="mycard"><span class="tag pos">My card</span></span></div>
+        </div>
+        <div class="sec" style="padding:14px 10px 0">
+          <div class="sh"><h3>EMI Offers</h3></div>
+          <div class="rail" id="emiAmazon"></div>
+        </div>
+        <div class="sec" style="padding:14px 10px 0">
+          <div class="summary"><div><p class="l">Total Savings</p><p class="v num">₹472</p></div><span class="div"></span><div><p class="l">Net Effective Price</p><p class="v num">₹26,527</p></div></div>
+        </div>
+      </div>
+      <div class="sec"><button class="hide" data-toggle><span>Hide offer</span><span data-icon="up"></span></button></div>
+    </section>
+
+    <h2 class="heading">Here are the best prices I found</h2>
+
+    <section class="card sc" id="bbCard">
+      <div class="sc-top">
+        <img class="logo34" src="assets-v5/logos/stores/bigbasket.png" alt="">
+        <div class="sc-name"><div class="nr"><b>BigBasket</b></div><span><span class="tag warn" data-icon="bolt">30 min delivery</span></span></div>
+        <span class="fpa">For price &amp; availability</span>
+        <a class="price-btn num" href="#" data-toast="Opens BigBasket in a new tab.">₹74,900 <span data-icon="ext"></span></a>
+      </div>
+      <div class="offers">
+        <div><div class="sh"><h3>Gift Card Offers</h3><span class="chev" data-icon="chev"></span></div><div class="rail" id="giftBB"></div></div>
+        <div><div class="sh"><h3>Payment Offers</h3><a href="#" data-toast="Your saved cards would open here.">Add Cards <span data-icon="chev"></span></a></div><div class="rail" id="payBB"></div></div>
+        <div class="summary"><div><p class="l">Total Savings</p><p class="v num">₹920</p></div><span class="div"></span><div><p class="l">Net Effective Price</p><p class="v num">₹22,070</p></div></div>
+      </div>
+      <button class="hide" data-toggle><span>Hide offer</span><span data-icon="up"></span></button>
+    </section>
+
+    <section class="card sc">
+      <div class="sc-top">
+        <img class="logo34" src="assets-v5/logos/stores/jiomart.png" alt="">
+        <div class="sc-name"><div class="nr"><b>Jio Mart</b><span class="tag pos" data-icon="sale">Sale live</span></div><p class="msg">Allow location to see price and delivery</p></div>
+        <button class="loc-btn" data-toast="Location permission would be requested here."><span data-icon="pin"></span>Allow location</button>
+      </div>
+      <p class="save-line">Save 1% more with gift cards. <span data-icon="down"></span></p>
+    </section>
+
+    <section class="card sc">
+      <div class="sc-top">
+        <img class="logo34" src="assets-v5/logos/stores/croma.png" alt="">
+        <div class="sc-name"><div class="nr"><b>Croma</b><span class="tag pos" data-icon="sale">Sale live</span></div><span class="deliv" data-icon="truck">Delivery by Fri, 17 Oct</span></div>
+        <a class="price-btn num" href="#" data-toast="Opens Croma in a new tab.">₹74,900 <span data-icon="ext"></span></a>
+      </div>
+      <p class="save-line">Save <b>₹1,685</b> more with gift cards &amp; card rewards. <span data-icon="down"></span></p>
+    </section>
+
+    <h2 class="heading">Also found on other stores</h2>
+    <section class="card os" id="others"></section>
+  </main>
+
+  <div class="dock">
+    <form class="composer" id="composer">
+      <svg class="link" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <label class="sr-only" for="url">Product link</label>
+      <input id="url" type="url" inputmode="url" placeholder="Paste another product link" autocomplete="off">
+      <button class="send" id="send" type="submit" aria-label="Compare prices"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M6 11l6-6 6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script>
+const A = "assets-v5/logos/";
+const ICON = {
+  chev: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  up: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="m6 15 6-6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  down: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  ext: '<svg viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  truck: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="17" r="2" fill="#fff" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="17" r="2" fill="#fff" stroke="currentColor" stroke-width="1.8"/></svg>',
+  sale: '<svg viewBox="0 0 24 24" fill="none"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" stroke="currentColor" stroke-width="2"/><path d="m15 9-6 6M9 9h.01M15 15h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h8l-1 8 9-12h-8l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/></svg>',
+};
+const icon = (k) => ICON[k] || "";
+const insertIcons = (root = document) => root.querySelectorAll("[data-icon]").forEach(el => {
+  const k = el.dataset.icon, svg = icon(k);
+  if (!svg || el.dataset.done) return; el.dataset.done = 1;
+  if (k === "truck" || k === "sale" || k === "bolt" || k === "pin") el.insertAdjacentHTML("afterbegin", svg);
+  else el.insertAdjacentHTML("beforeend", svg);
+});
+
+const giftTile = g => `<div class="gc"><div class="art"><img src="${A}gift-cards/${g.img}" alt="${g.name} gift card"></div>
+  <div class="d"><div><p class="m">${g.name}</p><div class="save-row"><span class="save num">Save ₹${g.save}</span><span class="rate">${g.rate} off</span></div></div>
+  <button class="btn2" data-toast="Buying the ${g.name} gift card would start here.">Buy gift card</button></div></div>`;
+const bankTile = b => `<button class="bo" data-toast="${b.name}: ${b.rate} off. Details and terms would open here.">
+  <span class="body"><img src="${A}banks/${b.img}" alt=""><span class="tx"><span class="save-row"><span class="save num">Save ₹${b.save}</span><span class="rate">${b.rate}</span></span><span class="bn">${b.name}</span></span></span>
+  <span class="foot"><span>${b.foot}</span>${icon("arrow")}</span></button>`;
+
+const GIFT_AMAZON = [
+  {name:"Amazon Fresh", img:"amazon-fresh.png", save:"540", rate:"2%"},
+  {name:"Amazon Shopping", img:"amazon-shopping.png", save:"472", rate:"1.75%"},
+  {name:"Amazon Pay", img:"amazon-pay.png", save:"337", rate:"1.25%"},
+];
+const GIFT_BB = [
+  {name:"BigBasket", img:"bigbasket.png", save:"920", rate:"4%"},
+  {name:"BB Now", img:"bb-now.png", save:"908", rate:"3.95%"},
+];
+const cards = (amt, list) => list.map(([name, img, foot]) => ({name, img, foot, save: amt, rate: "5% off"}));
+const PAY_AMAZON = cards("1,350", [["Amazon Pay ICICI","icici-amazon-pay.png","Credit Card · Cashback"],["Cashback SBI","sbi-card.png","Credit Card · Cashback"],["YES POP-CLUB","yes-bank.png","Credit Card · POP coins"]]);
+const PAY_BB = cards("1,150", [["Cashback SBI","sbi-card.png","Credit Card · Cashback"],["YES POP-CLUB","yes-bank.png","Credit Card · POP coins"],["IndusInd CRED RuPay","indusind.png","Credit Card · CRED points"]]);
+const EMI = [
+  ["1,750","10% off","SBI Credit Card","Pay in EMIs"],
+  ["1,500","10% off","SBI Credit Card","Pay in full"],
+  ["500","₹500 off","SBI Credit Card","Extra on EMIs"],
+  ["500","₹500 off","SBI Debit Card","Pay in full"],
+  ["500","₹500 off","SBI Credit Card","Extra, pay in full"],
+].map(([save, rate, name, foot]) => ({save, rate, name, foot, img: "sbi-card.png"}));
+
+const put = (id, html) => document.getElementById(id).insertAdjacentHTML("beforeend", html);
+put("giftAmazon", GIFT_AMAZON.map(giftTile).join(""));
+put("payAmazon", PAY_AMAZON.map(bankTile).join(""));
+put("emiAmazon", EMI.map(bankTile).join(""));
+put("giftBB", GIFT_BB.map(giftTile).join(""));
+put("payBB", PAY_BB.map(bankTile).join(""));
+
+const OTHERS = [
+  {name:"Unboxify", logo:"unboxify.png", deliv:"Sat, 18 Oct", price:"17,999", after:"17,099", save:"900"},
+  {name:"Bankofelectronics", logo:"bankofelectronics.png", deliv:"Fri, 17 Oct", price:"25,990", after:"24,690", save:"1,300"},
+];
+document.getElementById("others").innerHTML = OTHERS.map(o => `<div class="os-row">
+  <div class="os-top"><img class="logo34" src="${A}stores/${o.logo}" alt=""><div class="n"><b>${o.name}</b><span class="deliv" data-icon="truck">Delivery by ${o.deliv}</span></div>
+    <a class="price-btn num" href="#" data-toast="Opens ${o.name} in a new tab.">₹${o.price} <span data-icon="ext"></span></a></div>
+  <div class="tags"><span class="tag">Wireless</span><span class="tag">Noise cancelling</span><span class="tag neutral">Colour not listed</span></div>
+  <button class="see" data-toast="${o.name} offers would open here."><span class="l">You pay after offers</span><span class="r"><b class="num">₹${o.after}</b><span class="pill">Save ₹${o.save}</span>${icon("chev").replace('width="14" height="14"','width="16" height="16"').replace("currentColor","#007A45")}</span></button>
+</div>`).join("");
+insertIcons();
+
+// Hide / show offers
+document.querySelectorAll("[data-toggle]").forEach(b => b.addEventListener("click", () => {
+  const card = b.closest(".card"); const c = card.classList.toggle("collapsed");
+  b.querySelector("span").textContent = c ? "Show offers" : "Hide offer";
+}));
+
+// Toasts for prototype-only actions
+const toast = document.getElementById("toast"); let tt;
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-toast]"); if (!t) return;
+  e.preventDefault(); toast.textContent = t.dataset.toast; toast.classList.add("show");
+  clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2200);
+});
+document.getElementById("locBtn").addEventListener("click", () => { toast.textContent = "Location picker would open here."; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2200); });
+
+// Composer: send turns solid when there is text
+const url = document.getElementById("url"), send = document.getElementById("send");
+url.addEventListener("input", () => send.classList.toggle("on", url.value.trim().length > 0));
+document.getElementById("composer").addEventListener("submit", e => {
+  e.preventDefault(); if (!url.value.trim()) return;
+  toast.textContent = "Comparing prices for the new link…"; toast.classList.add("show");
+  clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2200);
+});
+</script>
+</body>
+</html>

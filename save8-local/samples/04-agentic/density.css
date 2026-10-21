@@ -1,0 +1,98 @@
+/* Sample 03 uses app-sized controls, independently of the landing-page baseline. */
+.calendar-merged .product-header .nav{height:60px;padding-top:8px;padding-bottom:8px}
+.calendar-merged .product-header .iconbtn{width:36px;height:36px;padding:8px;box-shadow:none}
+.calendar-merged .product-header .login{padding:9px 16px;font-size:14px}
+.calendar-merged .product-header .logo{height:24px}
+.calendar-merged .btn{min-height:40px;padding:8px 12px;font-size:13px;gap:6px}
+.calendar-merged .iconbtn{min-height:36px}
+.calendar-merged .calendar-header-content{padding-top:24px}
+.calendar-header-content h1{font-size:32px;line-height:1.15;letter-spacing:-.5px}
+.calendar-header-content .section-head{margin-bottom:10px}
+.calendar-search-row .search{min-height:42px;padding:8px 12px}
+.calendar-header-content .calendar-search-row input{font-size:16px}
+/* One owner for status-row spacing: equal 12px above and below. */
+.calendar-header-content:has(.calendar-state-row){padding-bottom:0}
+.calendar-state-row{margin:0;padding:12px 0;gap:10px}
+.calendar-state-row .filter,.calendar-header-content .date-trigger{min-height:40px;padding:8px 12px;font-size:13px}
+.calendar-merged main.agenda-main{padding-top:16px;max-width:calc(var(--page-content) + 48px)}
+.agenda-heading h2{font-size:22px;line-height:1.25}
+.sample-note{margin:6px 0 12px;line-height:1.45}
+.sale-card{grid-template-columns:40px minmax(0,1fr) auto;gap:12px;padding:14px 16px;margin-bottom:8px;border-radius:12px;align-items:center}
+.sale-card .store-logo{width:40px;height:40px;border-radius:10px}
+.sale-card .wordmark{font-size:10px;text-align:center;overflow-wrap:anywhere;padding:2px}
+.event-topline{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin-bottom:4px}
+.event-topline p{margin:0;font-size:12px;line-height:1.4}
+.sale-title h3{font-size:16px;line-height:1.35}
+.event-dates{font-size:13px;line-height:1.4;margin-top:4px}
+.event-highlight{font-size:13px;line-height:1.4;margin-top:3px}
+.sale-actions{grid-column:auto;gap:2px}
+.sale-actions .text-action{padding:8px 0;min-height:36px;font-size:12px}
+.group-heading{font-size:18px;margin:20px 0 8px}
+.group-note{font-size:12px;margin:0 0 10px}
+.brand-search,.brand-alert{padding:14px;gap:10px;margin:12px 0;border-radius:12px}
+.brand-search h3,.brand-alert h3{font-size:15px}
+.calendar-merged .agent-hero{padding:24px 20px 26px}
+.agent-hero h1{font-size:40px;line-height:1.05;margin:0 auto 18px}
+.agent-hero h1>span+span{margin-top:4px}
+.agent-hero .hero-search{height:54px;max-width:520px;padding:4px 4px 4px 14px;gap:10px}
+.agent-hero .hero-search input{font-size:16px}
+.agent-hero .hero-search .btn{width:44px;height:44px;min-height:44px;padding:0}
+.agent-hero .brand-prompt{min-height:30px;margin:10px 0 0;font-size:14px;flex-direction:row;gap:5px}
+.agent-hero .brand-prompt img{height:26px;width:80px}
+.agent-hero .hero-divider{display:none}
+.agent-hero p.compare-copy{font-size:13px;line-height:20px;margin:14px auto 0;max-width:520px}
+.agent-hero .brands{margin-top:12px}
+.agent-hero .brands img{width:26px;height:26px}
+.agent-hero .brand-total{font-size:13px;line-height:18px;padding:8px}
+.home-sales{padding:22px 0 26px}
+.home-sales .section-head{margin-bottom:12px}
+.home-sales .section-head h2,.how-production>h2{font-size:24px}
+.home-card{padding:16px;border-radius:12px}
+.home-card-top{margin-bottom:12px}
+.home-card .store-logo{width:40px;height:40px}
+.home-card h3{font-size:16px;margin:8px 0 6px}
+.home-card>a{padding-top:12px;margin-top:14px;min-height:40px}
+@media(max-width:720px){
+ .calendar-merged .product-header .nav{height:56px}
+ .calendar-header-content h1{font-size:27px}
+ .calendar-header-content #my-reminders{padding:8px;font-size:12px}
+ .sale-card{grid-template-columns:32px minmax(0,1fr);gap:8px 10px;padding:12px}
+ .sale-card .store-logo{width:32px;height:32px;align-self:start;margin-top:2px}
+ .sale-actions{grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
+ .sale-actions .btn{padding:7px 10px}
+ .sale-title h3{font-size:15px}
+ .event-topline{gap:3px 8px}
+ .event-topline p{font-size:11px}
+ .calendar-merged .agent-hero{padding:20px 16px 22px}
+ .agent-hero h1{font-size:32px;margin-bottom:16px}
+ .agent-hero p.compare-copy{max-width:340px;margin-top:12px}
+ .home-grid{gap:10px}
+ .home-card{min-width:74%;padding:14px}
+ .home-sales .section-head h2{font-size:21px}
+ .agenda-heading h2{font-size:21px}
+}
+/* Keep the shared shell stationary across full-page section navigation. */
+html{scrollbar-gutter:stable}
+.calendar-merged .reviewbar{height:34px;white-space:nowrap;padding-block:0}
+.calendar-merged .reviewbar span{overflow:hidden;text-overflow:ellipsis}
+.calendar-merged .reviewbar a{flex-shrink:0}
+.calendar-merged .section-rail{height:80px}
+.calendar-merged .section-tile{height:64px;min-height:64px}
+.calendar-merged .section-tile[aria-current=page]{height:76px;min-height:76px}
+.calendar-merged [data-icon]{display:inline-flex;width:19px;height:19px;flex-shrink:0}
+@media(max-width:1023px){.calendar-merged .section-rail{height:72px}.calendar-merged .section-tile{height:56px;min-height:56px}.calendar-merged .section-tile[aria-current=page]{height:68px;min-height:68px}}
+@view-transition{navigation:auto}
+.calendar-merged .reviewbar{view-transition-name:review-bar}
+.calendar-merged .product-header .nav{view-transition-name:top-nav}
+.calendar-merged .section-navigation{view-transition-name:section-tabs}
+::view-transition-group(review-bar),::view-transition-group(top-nav),::view-transition-group(section-tabs){animation-duration:0s}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.12s}
+@media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
+.brand-results{margin-bottom:16px}.brand-results .group-heading{margin-top:8px;font-size:14px;color:var(--muted)}
+.brand-result{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}
+.brand-result .store-logo{width:36px;height:36px;flex-shrink:0;border-radius:9px}.brand-result .wordmark{font-size:10px;text-align:center;padding:2px}
+.brand-result-copy{flex:1;min-width:0}.brand-result-copy h3{font-size:15px}.brand-result-copy p{font-size:12px;color:var(--muted);margin-top:3px}
+.brand-result-actions{display:flex;gap:6px;flex-wrap:wrap}.brand-result-actions .btn{font-size:12px;padding:7px 10px}
+@media(max-width:450px){.brand-result{flex-wrap:wrap}.brand-result-actions{margin-left:46px}.brand-result-copy{flex-basis:calc(100% - 46px)}}
+
+.context-back{display:block;color:var(--lp-brand-blue);font-size:13px;padding:10px 0;margin-bottom:18px;text-decoration:none}.agent-hero .context-back{color:var(--calendar-secondary)}.context-title{font-size:28px;line-height:1.2}.agent-hero:has(.context-back) h1{font-size:30px;line-height:1.15;max-width:500px}

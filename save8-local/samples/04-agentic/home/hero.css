@@ -1,0 +1,216 @@
+/* Reuse the calendar's active-tab surface and curved joins for Agent8. */
+.agent-merged .agent-hero{position:relative;z-index:2;margin:0;max-width:none;background:var(--calendar-hero);color:var(--calendar-on-hero);padding:36px 24px 40px}
+.agent-hero h1,.agent-hero h1>span+span{color:var(--calendar-on-hero)}
+.agent-hero h1{font-size:60px;margin-bottom:26px}
+.agent-hero .hero-search{background:#fff;border-color:transparent;color:#0e0f0c}
+.agent-hero .hero-search input{background:transparent;color:#0e0f0c}
+.agent-hero .hero-search input::placeholder{color:#6a6c6a}
+.agent-hero .hero-search>.icon{color:#6a6c6a}
+.agent-hero .brand-prompt{color:var(--calendar-secondary);font-size:18px}
+.agent-hero .brand-prompt img{background:#fff;border-radius:8px;padding:3px 8px;height:34px;width:100px}
+.agent-hero .hero-divider{background:rgba(255,255,255,.22);margin:20px auto}
+.agent-hero p.compare-copy,.agent-hero .compare-copy span{color:var(--calendar-secondary)}
+.agent-hero .compare-copy strong{color:#fff}
+.agent-hero .brand-total{background:#fff;color:var(--calendar-chrome)}
+.agent-hero .hero-search .btn{background:var(--lp-orange-cta);border-color:var(--lp-orange-cta);color:#fff}
+/* The bare input's default browser focus outline draws a hard rectangle across the rounded
+   pill — put the focus ring on the pill itself instead (same pattern as .gift-search-box
+   elsewhere in this workspace). */
+.hero-search input{outline:none}
+.hero-search:focus-within{outline:2px solid var(--lp-brand-blue);outline-offset:3px}
+@media(max-width:1023px){.agent-merged .agent-hero{padding:28px 16px 30px}.agent-hero h1{font-size:44px;line-height:1.08;margin-bottom:24px}.agent-hero .hero-search{height:64px;max-width:584px}.agent-hero .hero-search .btn{width:52px;height:52px}.agent-hero .brand-prompt{min-height:52px;font-size:16px;flex-direction:row;flex-wrap:wrap;gap:5px}.agent-hero p.compare-copy{margin-top:22px;max-width:340px;font-size:14px;line-height:22px}}
+@media(max-width:400px){.agent-hero h1{font-size:38px}.agent-hero .brand-prompt{font-size:14px}.agent-hero .brand-prompt img{width:88px}.agent-hero .hero-search input{min-width:0;font-size:14px}}
+
+/* Search-name suggestions: an extension of the always-white hero search pill, so its colours
+   are hardcoded to match .agent-hero .hero-search rather than the light/dark theme tokens.
+   The panel lives outside <header>, which clips (overflow:hidden) for the curved tab rail, so
+   its position is set from JS (search-suggestions.js) rather than anchored via CSS alone. */
+.agent-hero .search-shell{position:relative;max-width:552px;margin:0 auto}
+.search-suggestions{position:fixed;z-index:50;background:#fff;color:#0e0f0c;border-radius:20px;box-shadow:0 20px 50px #0006;overflow:hidden;text-align:left;max-height:min(420px,70vh);overflow-y:auto}
+.suggestion-group{padding:16px 18px 14px}
+.suggestion-group+.suggestion-group{border-top:1px solid #ece9e0}
+.suggestion-group-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.suggestion-list{padding:6px 0}
+.suggestion-row{display:flex;align-items:center;gap:13px;width:100%;padding:9px 18px;border:0;border-top:1px solid #ece9e0;background:none;text-align:left;font:inherit;color:#0e0f0c;cursor:pointer}
+.suggestion-row:first-child{border-top:0}
+.product-swatch{position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:10px;flex-shrink:0}
+.product-swatch svg{width:55%;height:55%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.product-swatch.brand-initial{font-family:"League Spartan",sans-serif;font-weight:800;line-height:1}
+.suggestion-cat.is-brand{color:#000b80;font-weight:700;background:#eef0ff;padding:3px 9px;border-radius:999px;font-size:11px}
+.product-swatch img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:82%;height:82%;object-fit:contain}
+.suggestion-row .suggestion-name{flex:1;min-width:0;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.suggestion-row .suggestion-name mark{background:none;color:#000b80;font-weight:700}
+.suggestion-row .suggestion-cat{font-size:12px;color:#6a6c6a;flex-shrink:0}
+.suggestion-row:hover,.suggestion-row.active{background:#f6f6f1}
+.suggestion-row.fallback .suggestion-name{font-weight:600}
+@media(max-width:1023px){.agent-hero .search-shell{max-width:584px}.search-suggestions{border-radius:18px}}
+@media(max-width:400px){.suggestion-row .suggestion-cat{display:none}}
+
+/* Variant popup — opens when a picked/typed product has more than one SKU (storage, colour,
+   size…). Picking one is what lets the result screen below skip straight to comparing prices,
+   same certainty as a URL paste would have given. */
+#variant-dialog{max-width:400px}
+.variant-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.variant-head .product-swatch{width:52px;height:52px;border-radius:14px}
+.variant-head h2{font-size:18px;margin:0}
+.variant-group{margin-bottom:20px}
+.variant-group-label{display:block;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.variant-options{display:flex;flex-wrap:wrap;gap:8px}
+.variant-option{border:1.5px solid var(--border);background:var(--surface);border-radius:999px;padding:9px 16px;font:inherit;font-size:13.5px;color:var(--ink);cursor:pointer}
+.variant-option[aria-pressed=true]{border-color:var(--lp-brand-blue);background:var(--lp-info-bg);color:var(--lp-brand-blue);font-weight:600}
+.variant-confirm{width:100%;margin-top:6px}
+
+/* Result screen — chat-style, and deliberately missing the pieces that only make sense when a
+   URL identified one exact store listing: no URL bubble (there is no URL), no "found the best
+   offer at [source store]" card, no source price, no total-savings-vs-source summary. It goes
+   straight to comparing prices across stores, which doesn't need a source. */
+.result-bubble-row{display:flex;justify-content:flex-end;margin-bottom:22px}
+.result-bubble{max-width:80%;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:12px 18px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px}
+.result-bubble .product-swatch{width:28px;height:28px;border-radius:8px;flex-shrink:0}
+.result-intro{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.result-intro p{font-size:15px;font-weight:600;margin:0}
+.result-intro button{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:var(--lp-brand-blue);cursor:pointer}
+.store-list{display:grid;gap:10px}
+.store-row{padding:14px 16px 12px;background:var(--surface);border:1px solid var(--border);border-radius:20px}
+.store-row.best{border-color:var(--lp-savings-deep-green);box-shadow:0 0 0 1px var(--lp-savings-deep-green) inset}
+.store-row-main{display:flex;align-items:center;gap:12px}
+.store-row .store-logo{width:36px;height:36px;border-radius:12px;flex-shrink:0}
+.store-copy{flex:1;min-width:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.store-copy strong{font-size:15px;font-weight:600}
+.store-badge{font-size:10.5px;font-weight:700;color:var(--lp-savings-deep-green);background:rgba(3,120,69,.1);padding:2px 8px;border-radius:999px}
+.store-price-wrap{flex-shrink:0}
+.store-checking{font-size:13px;color:var(--muted)}
+.store-buy{display:inline-flex;align-items:center;gap:6px;background:var(--lp-orange-cta-fill);color:#fff;font-size:14px;font-weight:700;padding:9px 14px;border-radius:14px;text-decoration:none;white-space:nowrap;border:0;cursor:pointer;font-family:inherit}
+.store-buy svg{width:14px;height:14px;flex-shrink:0}
+.store-teaser{display:flex;align-items:center;gap:3px;width:100%;margin-top:8px;padding:2px 0;border:0;background:none;font:inherit;font-size:12.5px;font-weight:500;color:var(--lp-savings-deep-green);cursor:pointer}
+.store-teaser b{font-weight:700}
+.store-teaser svg{width:15px;height:15px;flex-shrink:0;transition:transform .15s ease}
+.store-teaser[aria-expanded=true] svg{transform:rotate(180deg)}
+.store-teaser-note{display:none;margin-top:6px;padding-top:8px;border-top:1px dashed var(--border);font-size:12px;color:var(--muted)}
+.store-teaser-note.open{display:block}
+.agent-recommendation{margin:28px 0 8px;padding:0 2px}.agent-recommendation h2{font:inherit;font-size:13px;font-weight:600;color:var(--lp-brand-blue);margin:0 0 10px}.agent-recommendation p{font-size:15px;line-height:1.8;color:var(--ink);margin:0}
+
+.pipeline-section{padding:28px 24px 130px}
+.pipeline-section:not([hidden]){animation:pipeline-in .25s ease both}
+@keyframes pipeline-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Results mode: the marketing hero and its nav tabs make no sense once a product is
+   identified — the real result screen has its own minimal chat-style header and a bottom
+   compose bar for the next search, not a landing-page hero. See PRODUCT-NOTES.md. */
+body.results-mode .product-header{display:none}
+.chat-header{display:none;align-items:center;justify-content:space-between;gap:12px;height:56px;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
+body.results-mode .chat-header{display:flex}
+.chat-header button{border:0;background:none;box-shadow:none;font-size:19px;color:var(--ink);width:36px;height:36px;border-radius:10px}
+.chat-header button:hover{background:var(--soft)}
+.chat-header-logo{display:flex;align-items:center}
+.chat-header-logo img{height:22px;display:block}
+
+.compose-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--bg);border-top:1px solid var(--border);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+body.results-mode .compose-bar{display:block}
+.compose-bar .search-shell{max-width:640px;margin:0 auto}
+.compose-bar .hero-search{background:var(--surface);border:1.5px solid var(--border);color:var(--ink);height:52px}
+.compose-bar .hero-search input{color:var(--ink)}
+.compose-bar .hero-search input::placeholder{color:var(--muted)}
+.compose-bar .hero-search>.icon{color:var(--muted)}
+.compose-bar .hero-search .btn{background:var(--lp-orange-cta-fill);border-color:var(--lp-orange-cta-fill);width:40px;height:40px}
+
+/* Product-name comparison: identity has no monetary baseline. */
+.pipeline-section{max-width:740px;margin:auto}
+.fixture-label{font-size:11px;color:var(--muted);margin:0 0 14px}
+.selected-product{display:flex;align-items:center;gap:20px;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:24px;margin-bottom:28px}
+.selected-product .product-swatch{flex-shrink:0}
+.selected-product-copy{min-width:0}
+.product-eyebrow{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.selected-product h1{font-size:23px;line-height:1.3;margin:7px 0;overflow-wrap:anywhere}
+.selected-product p{font-size:14px;color:var(--muted);margin:0;line-height:1.6}
+.store-list{gap:18px}.store-row{padding:20px;border-radius:24px}
+.offer-totals{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center;background:rgba(3,120,69,.08);border:1px solid rgba(3,120,69,.35);border-radius:13px;padding:16px 10px;margin-top:16px}
+.offer-totals div+div{border-left:1px solid var(--border)}.offer-totals span{display:block;font-size:12px;color:var(--muted)}.offer-totals strong{display:block;color:var(--lp-savings-deep-green);font-size:18px;margin-top:5px}
+.offer-explanation{font-size:11px;line-height:1.6;color:var(--muted);margin:10px 2px 0}
+@media(max-width:520px){.pipeline-section{padding:18px 14px 120px}.selected-product{padding:16px;gap:14px}.selected-product .product-swatch{width:76px!important;height:76px!important}.selected-product h1{font-size:19px}.store-row{padding:15px}.store-row-main{gap:8px}.store-copy{gap:4px}.store-copy strong{font-size:14px}.store-badge{font-size:9px}.store-buy{padding:9px 11px}}
+
+/* Offer rails mirror the production result-card hierarchy. */
+.store-offers[hidden],.store-teaser[hidden]{display:none}
+.store-row{overflow:hidden}.store-row.best{box-shadow:none;border-color:var(--border)}
+.perk-section{border-top:1px solid var(--border);margin-top:14px;padding-top:14px}
+.perk-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.perk-heading h3{font:inherit;font-size:14px;font-weight:600;margin:0}
+.perk-heading a,.perk-heading button{color:var(--lp-brand-blue);font:inherit;font-size:12px;font-weight:600;background:none;border:0;text-decoration:none;cursor:pointer;padding:0}
+.perk-rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;padding:1px 1px 3px}
+.perk-tile{flex:0 0 228px;min-width:0;scroll-snap-align:start;border:1px solid var(--border);border-radius:15px;padding:12px;background:var(--surface);color:var(--ink);font:inherit;text-align:left}
+.perk-title{display:flex;align-items:flex-start;gap:8px;min-height:42px;position:relative}
+.perk-title img{width:29px;height:34px;object-fit:contain;border-radius:5px;flex-shrink:0}
+.perk-title strong{font-size:13px;font-weight:500;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.perk-benefit{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:12px;min-height:27px}
+.perk-benefit b{color:var(--lp-savings-deep-green);font-weight:600;white-space:nowrap}
+.perk-rate{background:var(--lp-info-bg);color:var(--lp-brand-blue);font-weight:600;border-radius:4px;padding:2px 5px;white-space:nowrap}
+.perk-buy,.perk-arrow{margin-left:auto;background:var(--lp-info-bg);color:var(--lp-brand-blue);border-radius:999px;padding:6px 12px;text-decoration:none;font-weight:600}
+.credit-tile{border-color:color-mix(in srgb,var(--lp-brand-blue) 12%,var(--surface));cursor:pointer;position:relative}
+.credit-tile .perk-title{padding-right:39px}.my-card-tag{position:absolute;right:0;top:0;font-size:8px;color:var(--muted);background:var(--soft);padding:2px 4px;border-radius:8px;white-space:nowrap}
+.bank-mark{width:28px;height:28px;flex-shrink:0;display:grid;place-items:center;border:2px solid #e52d36;color:#174d86;background:#fff;font-size:7px;font-weight:800;border-radius:3px}
+.bank-mark.icici{color:#a32a15;border-color:#e47d24;border-radius:50%;font-size:7px}
+.credit-tile small{font-size:10px;color:var(--muted)}.perk-arrow{font-size:19px;padding:0 5px;line-height:25px}
+.perk-collapse{display:block;width:100%;padding:17px 0 2px;border:0;background:none;color:var(--ink);font:inherit;font-size:13px;font-weight:500;cursor:pointer}
+.store-teaser{justify-content:center;margin-top:16px;font-size:12px;line-height:1.5}
+.offer-totals{border-radius:8px}.offer-totals strong{font-size:16px}
+.credit-info-dialog{max-width:400px;width:calc(100% - 32px);padding:24px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--ink)}
+.credit-info-dialog h2{font-size:18px;line-height:1.4;margin:0 0 12px}.credit-info-dialog p{font-size:14px;line-height:1.6;margin-bottom:20px}
+@media(max-width:520px){.perk-tile{flex-basis:220px}.perk-heading h3{font-size:14px}}
+
+/* Product identity opens a details sheet, independent of a store listing. */
+.selected-product{position:relative;padding-right:48px}
+.selected-product-open{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:inherit;background:transparent;color:var(--muted);cursor:pointer;text-align:right;padding:0 18px;font-size:28px}
+.selected-product-open:focus-visible{outline:2px solid var(--lp-brand-blue);outline-offset:3px}
+dialog.product-details-sheet{position:fixed;inset:auto 0 0;margin:0 auto;width:min(100%,680px);max-width:680px;max-height:min(88dvh,calc(100dvh - 64px - env(safe-area-inset-top)));padding:0;border:1px solid var(--border);border-bottom:0;border-radius:28px 28px 0 0;background:var(--bg);color:var(--ink);overflow:visible;box-sizing:border-box}
+dialog.product-details-sheet[open]{display:flex;flex-direction:column}
+.product-details-sheet::backdrop{background:rgba(0,0,0,.4);backdrop-filter:blur(3px)}
+.sheet-handle{flex-shrink:0;width:48px;height:5px;background:var(--muted);border-radius:10px;margin:12px auto 4px;opacity:.6}
+.product-details-header{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 20px 18px;border-bottom:1px solid var(--border)}
+.product-details-header h2{font-size:20px;margin:0;font-weight:600}
+.product-details-close{position:absolute;top:-52px;right:16px;width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--border);border-radius:50%;background:var(--surface);color:var(--ink);font:inherit;font-size:24px;cursor:pointer}
+.product-details-body{overflow-y:auto;overscroll-behavior:contain;padding:18px 20px max(24px,env(safe-area-inset-bottom));min-height:0}
+.product-details-image{height:clamp(200px,36dvh,340px);display:flex;align-items:center;justify-content:center;background:var(--surface);border-radius:16px;padding:20px}
+.product-details-image img{display:block;width:100%;height:100%;object-fit:contain}.image-unavailable{color:var(--muted);font-size:14px}
+.product-details-name{font-size:20px;line-height:1.45;font-weight:600;margin:20px 0 16px}
+.product-details-specs{border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden;margin:0}
+.product-details-specs>div{display:grid;grid-template-columns:1fr 1.5fr;gap:20px;padding:14px 16px;font-size:14px;line-height:1.45}
+.product-details-specs>div+div{border-top:1px solid var(--border)}.product-details-specs dt{color:var(--muted)}.product-details-specs dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.product-details-thumbs{display:flex;overflow-x:auto;gap:8px;margin-top:12px}.product-details-thumbs button{flex:0 0 64px;height:64px;border:1px solid var(--border);border-radius:10px;background:var(--surface);padding:5px;cursor:pointer}.product-details-thumbs button[aria-pressed=true]{border:2px solid var(--ink)}.product-details-thumbs img{width:100%;height:100%;object-fit:contain}
+@media(max-width:520px){.selected-product{padding-right:38px}.selected-product-open{padding-right:12px}.product-details-body{padding-left:16px;padding-right:16px}.product-details-header{padding-left:16px;padding-right:16px}}
+
+/* Secondary store group in the ten-store comparison. */
+.other-stores{margin-top:30px}
+.other-stores h2{display:flex;align-items:center;gap:8px;margin:0 0 16px;font-family:inherit;font-size:16px;font-weight:600}
+.other-stores h2 span{font-size:12px;font-weight:500;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 7px}
+.store-initials{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:12px;font-weight:700;color:#172d44}
+
+.other-stores>.store-list{display:grid;grid-auto-flow:column;grid-auto-columns:min(86%,360px);grid-template-columns:none;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;align-items:start;padding:2px 2px 12px;scrollbar-width:thin}
+.other-stores .store-row{min-width:0;scroll-snap-align:start;padding:16px;border-radius:20px}
+.other-stores .store-row-main{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px}
+.other-stores .store-price-wrap{grid-column:2}
+.other-stores>.store-list:focus-visible{outline:2px solid var(--lp-brand-blue);outline-offset:4px;border-radius:8px}
+
+/* Horizontal store cards open their offers in a modal sheet. */
+dialog.store-offers-sheet{position:fixed;inset:auto 0 0;margin:0 auto;width:min(100%,680px);max-width:680px;max-height:88dvh;padding:0;border:1px solid var(--border);border-bottom:0;border-radius:26px 26px 0 0;background:var(--surface);color:var(--ink);overflow:hidden;box-sizing:border-box}
+dialog.store-offers-sheet[open]{display:flex;flex-direction:column}
+.store-offers-sheet::backdrop{background:rgba(0,0,0,.4);backdrop-filter:blur(3px)}
+.store-offers-sheet-header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 20px 18px;border-bottom:1px solid var(--border);flex-shrink:0}
+.store-offers-sheet-header h2{font:inherit;font-size:20px;font-weight:600;margin:0}
+.store-offers-sheet-header p{font-size:13px;color:var(--muted);margin:6px 0 0}
+.store-offers-sheet-header button{font-size:24px;flex-shrink:0}
+.store-offers-sheet-body{overflow-y:auto;overscroll-behavior:contain;padding:0 20px max(24px,env(safe-area-inset-bottom));min-height:0}
+.store-offers-sheet .perk-section:first-child{border-top:0;margin-top:0;padding-top:20px}
+.store-offers-sheet .perk-collapse{display:none}
+
+.agent-recommendation ol{margin:12px 0 18px;padding-left:23px;font-size:15px;line-height:1.65;color:var(--ink)}
+.agent-recommendation li{padding-left:4px;margin:7px 0}
+.agent-recommendation .recommendation-alternative{line-height:1.65}
+.agent-recommendation .recommendation-restriction{margin-top:10px;font-size:13px;line-height:1.6;color:var(--muted)}
+
+.agent-recommendation a{color:var(--lp-brand-blue);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.agent-recommendation a:hover{text-decoration-thickness:2px}
+.agent-recommendation a:focus-visible{outline:2px solid var(--lp-brand-blue);outline-offset:3px;border-radius:2px}
+
+.store-row .store-logo{display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;border:1px solid var(--border)}
+.store-row .store-logo img{width:100%;height:100%;object-fit:contain;padding:3px;box-sizing:border-box}
+.perk-title img.bank-logo{width:30px;height:30px;object-fit:contain;flex-shrink:0;background:#fff;border:1px solid var(--border);border-radius:6px;padding:2px;box-sizing:border-box}

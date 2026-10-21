@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Store Comparison · Save8</title>
+<script>
+  // Same storage key as the rest of the prototype; fall back to the system theme.
+  try {
+    const saved = JSON.parse(localStorage.getItem("save8-prototype-theme"));
+    document.documentElement.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  } catch { document.documentElement.dataset.theme = "light"; }
+</script>
+<link rel="preload" href="../shared/assets/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../shared/assets/league-spartan.woff2" as="font" type="font/woff2" crossorigin>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+@font-face{font-family:Inter;src:url(../shared/assets/inter.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Spartan;src:url(../shared/assets/league-spartan.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+/* Tokens: Save8 brand values. One accent (orange CTA); green is reserved for savings state.
+   Radius rule: cards 18px, inner panels 12px, logos 10px, buttons and badges full pill. */
+:root{
+  --bg:#f7f4ed; --surface:#fffefb; --surface-2:#f1ede4; --ink:#0e0f0c; --body:#454745; --muted:#666865;
+  --line:rgba(14,15,12,.09); --line-strong:rgba(14,15,12,.16);
+  --accent:#c25410; --accent-ink:#fffefb; --accent-soft:rgba(194,84,16,.10);
+  --save:#037845; --save-bg:rgba(3,120,69,.09);
+  --shadow:0 1px 2px rgba(60,48,20,.05),0 10px 30px -12px rgba(60,48,20,.14);
+  --r-card:18px; --r-inner:12px; --r-logo:10px;
+}
+:root[data-theme="dark"]{
+  --bg:#0f0e0c; --surface:#1b1a17; --surface-2:#252420; --ink:#f6f4ee; --body:#c4c1b8; --muted:#a3a097;
+  --line:rgba(246,244,238,.10); --line-strong:rgba(246,244,238,.2);
+  --accent:#f08a4b; --accent-ink:#1c0d03; --accent-soft:rgba(240,138,75,.14);
+  --save:#43d895; --save-bg:rgba(67,216,149,.11);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 36px -16px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Top bar */
+.topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1120px;margin:0 auto;height:60px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:26px;width:auto}
+.icon-btn{width:40px;height:40px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);display:grid;place-items:center;cursor:pointer;font-size:18px}
+.icon-btn:hover{border-color:var(--ink)}
+
+/* Layout */
+.page{max-width:1120px;margin:0 auto;padding:20px 16px 56px}
+.layout{display:grid;gap:20px}
+@media(min-width:960px){
+  .page{padding-top:32px}
+  .layout{grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:32px;align-items:start}
+}
+/* Pin the deal column only when the whole column fits on screen. */
+@media(min-width:960px) and (min-height:1180px){.primary-col{position:sticky;top:84px}}
+
+/* Product */
+.product{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.product-img{width:76px;height:76px;flex:none;border-radius:var(--r-inner);background:linear-gradient(160deg,#e9edff,#d3daff);display:grid;place-items:center;overflow:hidden}
+.product-img img{height:66px;width:auto;object-fit:contain}
+.product h1{font:600 28px/1.1 Spartan,Inter,sans-serif;letter-spacing:-.01em;margin:0 0 4px}
+.product p{margin:0;color:var(--body);font-size:14px}
+
+/* Card shell */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow)}
+
+/* Best deal */
+.deal{padding:20px}
+.deal-head{display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;flex:none;border-radius:var(--r-logo);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;background:#fff}
+.logo img{width:78%;height:78%;object-fit:contain}
+.deal-store{font-weight:600;font-size:16px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:var(--save-bg);color:var(--save);font-size:12px;font-weight:600;white-space:nowrap}
+.deal-head .badge{margin-left:auto}
+.pay-label{margin:20px 0 2px;color:var(--muted);font-size:13px}
+.pay-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.pay-price{font:600 44px/1 Spartan,Inter,sans-serif;letter-spacing:-.02em}
+.was{color:var(--muted);text-decoration:line-through;font-size:16px}
+.saved{display:flex;align-items:center;gap:10px;margin-top:16px;padding:12px 14px;border-radius:var(--r-inner);background:var(--save-bg);color:var(--save);font-weight:600;font-size:14px}
+.saved i{font-size:20px}
+
+.breakdown{margin:18px 0 0;padding:0}
+.breakdown div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:14px;color:var(--body)}
+.breakdown dd{margin:0}
+.breakdown .minus dd{color:var(--save);font-weight:500}
+.breakdown .total{margin-top:6px;padding-top:12px;border-top:1px dashed var(--line-strong);color:var(--ink);font-weight:600;font-size:15px}
+
+.howto{margin:18px 0 0;padding:16px;border-radius:var(--r-inner);background:var(--surface-2);list-style:none;counter-reset:s;display:grid;gap:10px}
+.howto li{counter-increment:s;display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:14px;color:var(--body)}
+.howto li::before{content:counter(s);width:24px;height:24px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--ink)}
+
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap;cursor:pointer;border:1px solid transparent;transition:transform .2s cubic-bezier(.16,1,.3,1),background-color .2s,border-color .2s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:color-mix(in srgb,var(--accent) 88%,var(--ink))}
+.btn-ghost{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{min-height:40px;font-size:14px;padding:0 14px}
+
+/* Card offers */
+.cards{margin-top:16px;padding:18px 20px}
+.cards h2,.stores h2{font:600 18px/1.25 Spartan,Inter,sans-serif;margin:0}
+.cards > p{margin:4px 0 14px;color:var(--body);font-size:14px}
+.card-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card-tile{padding:14px;border-radius:var(--r-inner);border:1px solid var(--line);background:var(--surface-2)}
+.card-tile .logo{width:32px;height:32px;margin-bottom:10px}
+.card-tile strong{display:block;font-size:13px;font-weight:600;line-height:1.35}
+.card-tile .reward{margin-top:8px;font:600 20px/1.1 Spartan,Inter,sans-serif}
+.card-tile small{color:var(--muted);font-size:12px}
+.note{display:flex;gap:8px;margin:14px 0 0;color:var(--body);font-size:13px}
+.note i{font-size:16px;color:var(--muted);margin-top:2px}
+
+/* All stores */
+.stores{padding:18px 8px 8px}
+.stores-head{padding:0 12px 10px}
+.stores-head p{margin:4px 0 0;color:var(--body);font-size:14px}
+.cols{display:flex;justify-content:space-between;padding:8px 12px;color:var(--muted);font-size:12px;border-bottom:1px solid var(--line)}
+.store-list{list-style:none;margin:0;padding:0}
+.store + .store{border-top:1px solid var(--line)}
+.store-btn{width:100%;display:grid;grid-template-columns:40px minmax(0,1fr) auto 20px;align-items:center;gap:12px;padding:14px 12px;border:0;background:none;text-align:left;cursor:pointer;border-radius:var(--r-inner)}
+.store-btn:hover{background:var(--surface-2)}
+.store-name{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+.store-name .badge{font-size:11px;padding:2px 8px}
+.store-sub{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.store-sub s{text-decoration:line-through}
+.store-total{text-align:right}
+.store-total b{display:block;font-weight:600;font-size:16px}
+.store-total span{font-size:12px;color:var(--muted)}
+.store.is-best .store-total b{color:var(--save)}
+.chev{font-size:16px;color:var(--muted);transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.store-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+
+.store-detail{padding:0 12px 16px 64px}
+.store-detail[hidden]{display:none}
+.store-detail .breakdown{margin-top:0}
+.detail-gifts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.gift-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);font-size:12px;color:var(--body)}
+.gift-chip b{color:var(--save);font-weight:600}
+.detail-cards{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.detail-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+
+.more{display:flex;justify-content:center;padding:10px 12px 8px;border-top:1px solid var(--line)}
+.more button{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:10px 12px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.more button:hover{background:var(--surface-2)}
+
+.foot{margin:28px 0 0;color:var(--muted);font-size:12px;text-align:center}
+
+@media(max-width:420px){
+  .pay-price{font-size:38px}
+  .actions{grid-template-columns:1fr}
+  .card-tiles{grid-template-columns:1fr}
+  .store-detail{padding-left:12px}
+}
+
+/* Motion: entry reveal tells the eye best deal first, then the list. */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{animation:rise .6s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0) * 70ms)}
+  .store-detail:not([hidden]){animation:fade .3s cubic-bezier(.16,1,.3,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){.btn,.chev{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../home/index.html" aria-label="Save8 home"><img src="../shared/assets/save8-logo.webp" alt="Save8"></a>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch light or dark theme"><i class="ph ph-moon" aria-hidden="true"></i></button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="layout">
+    <div class="primary-col">
+      <section class="product reveal" style="--i:0" aria-label="Selected product">
+        <div class="product-img"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/IPhone_17_Vector.svg/330px-IPhone_17_Vector.svg.png" alt="iPhone 17" onerror="this.remove()"></div>
+        <div>
+          <h1>iPhone 17</h1>
+          <p>128GB, Black</p>
+        </div>
+      </section>
+
+      <section class="card deal reveal" style="--i:1" aria-labelledby="deal-title" id="deal"></section>
+
+      <section class="card cards reveal" style="--i:2" aria-labelledby="cards-title" id="card-offers"></section>
+    </div>
+
+    <section class="card stores reveal" style="--i:3" aria-labelledby="stores-title">
+      <div class="stores-head">
+        <h2 id="stores-title">All stores</h2>
+        <p id="stores-range"></p>
+      </div>
+      <div class="cols" aria-hidden="true"><span>Store</span><span>Total after offers</span></div>
+      <ul class="store-list" id="store-list"></ul>
+      <div class="more"><button type="button" id="more-btn" aria-controls="store-list"></button></div>
+    </section>
+  </div>
+
+  <p class="foot">Design preview. Prices, offers and product image are sample data.</p>
+</main>
+
+<script>
+const ASSETS = "../shared/assets/";
+const GIFT_RATE = 0.02;
+const STORES = [
+  { name: "Flipkart", logo: "flipkart.webp", bg: "#f9e72f", price: 58550 },
+  { name: "Amazon", logo: "amazon.webp", price: 61720, extraGift: { name: "Amazon Pay", rate: 0.01 }, giftName: "Amazon shopping" },
+  { name: "Reliance Digital", logo: "reliancedigital.webp", price: 64670 },
+  { name: "Poorvika", logo: "poorvika.webp", price: 64750 },
+  { name: "Vijay Sales", logo: "vijaysales.webp", price: 64790 },
+  { name: "Bajaj Electronics", logo: "bajaj.svg", price: 64940 },
+  { name: "Tata CLiQ", logo: "tatacliq.webp", price: 67050 },
+  { name: "Sangeetha", logo: "sangeetha.png", price: 71010 },
+  { name: "JioMart", logo: "jiomart.webp", price: 71160 },
+  { name: "Croma", logo: "croma.webp", price: 74560 },
+];
+const CARDS = [
+  { id: "hdfc", bank: "HDFC Bank", name: "HDFC Tata Neu Infinity", logo: "hdfc.webp", rate: 0.015, unit: "back as NeuCoins" },
+  { id: "icici", bank: "ICICI Bank", name: "Amazon Pay ICICI", logo: "icici.webp", rate: 0.01, unit: "Amazon Pay cashback" },
+];
+const VISIBLE = 5;
+
+const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const giftUrl = name => "../gift-card/index.html?brand=" + encodeURIComponent(name);
+const logo = (s, alt = "") => `<span class="logo" style="background:${s.bg || "#fff"}"><img src="${ASSETS + s.logo}" alt="${esc(alt)}"></span>`;
+
+const rows = STORES.map(s => {
+  const gift = Math.round(s.price * GIFT_RATE);
+  return { ...s, gift, total: s.price - gift, giftLabel: s.giftName || s.name };
+}).sort((a, b) => a.total - b.total);
+const best = rows[0];
+const worst = rows[rows.length - 1];
+
+function breakdown(r) {
+  return `<dl class="breakdown num">
+    <div><dt>${esc(r.name)} price</dt><dd>${inr(r.price)}</dd></div>
+    <div class="minus"><dt>${esc(r.giftLabel)} gift card, 2% off</dt><dd>−${inr(r.gift)}</dd></div>
+    <div class="total"><dt>You pay</dt><dd>${inr(r.total)}</dd></div>
+  </dl>`;
+}
+
+// Best deal
+document.getElementById("deal").innerHTML = `
+  <div class="deal-head">
+    ${logo(best)}
+    <span class="deal-store" id="deal-title">${esc(best.name)}</span>
+    <span class="badge"><i class="ph-bold ph-trend-down" aria-hidden="true"></i>Lowest total</span>
+  </div>
+  <p class="pay-label">You pay</p>
+  <div class="pay-row num">
+    <span class="pay-price">${inr(best.total)}</span>
+    <span class="was"><span class="sr-only">Store price </span>${inr(best.price)}</span>
+  </div>
+  <div class="saved"><i class="ph-fill ph-seal-percent" aria-hidden="true"></i><span>${inr(worst.total - best.total)} less than ${esc(worst.name)}</span></div>
+  ${breakdown(best)}
+  <ol class="howto">
+    <li>Buy a ${inr(best.price)} ${esc(best.name)} gift card for ${inr(best.total)}.</li>
+    <li>Add iPhone 17 to your ${esc(best.name)} cart and pay with the gift card.</li>
+  </ol>
+  <div class="actions">
+    <a class="btn btn-primary" href="${giftUrl(best.name)}">Buy gift card</a>
+    <a class="btn btn-ghost" href="#" aria-label="Open ${esc(best.name)} listing">Open ${esc(best.name)}<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+  </div>`;
+
+// Card offers on the best store
+const cardRewards = CARDS.map(c => ({ ...c, reward: Math.round(best.price * c.rate) }));
+const topCard = cardRewards.reduce((a, b) => (b.reward > a.reward ? b : a));
+document.getElementById("card-offers").innerHTML = `
+  <h2 id="cards-title">Paying by card instead?</h2>
+  <p>Rewards on ${esc(best.name)} with your saved cards.</p>
+  <div class="card-tiles">
+    ${cardRewards.map(c => `
+      <div class="card-tile">
+        <span class="logo"><img src="${ASSETS + c.logo}" alt="${esc(c.bank)}"></span>
+        <strong>${esc(c.name)}</strong>
+        <div class="reward num">${inr(c.reward)}</div>
+        <small>${esc(c.unit)}</small>
+      </div>`).join("")}
+  </div>
+  <p class="note"><i class="ph ph-info" aria-hidden="true"></i><span>Card rewards can't be combined with the gift card. The gift card saves ${inr(best.gift - topCard.reward)} more, and the saving applies at checkout.</span></p>`;
+
+// All stores
+document.getElementById("stores-range").textContent =
+  `${rows.length} stores, from ${inr(best.total)} to ${inr(worst.total)} after the best gift card at each.`;
+
+const list = document.getElementById("store-list");
+list.innerHTML = rows.map((r, i) => {
+  const diff = r.total - best.total;
+  const extra = r.extraGift ? Math.round(r.price * r.extraGift.rate) : 0;
+  const cards = CARDS.map(c => `${c.name} ${inr(r.price * c.rate)}`).join(", ");
+  return `<li class="store${i === 0 ? " is-best" : ""}"${i >= VISIBLE ? " hidden" : ""}>
+    <button class="store-btn" type="button" aria-expanded="false" aria-controls="detail-${i}">
+      ${logo(r, r.name)}
+      <span>
+        <span class="store-name">${esc(r.name)}${i === 0 ? '<span class="badge">Best</span>' : ""}</span>
+        <span class="store-sub num">Store price <s>${inr(r.price)}</s></span>
+      </span>
+      <span class="store-total num"><b>${inr(r.total)}</b><span>${i === 0 ? "Lowest" : "+" + inr(diff)}</span></span>
+      <i class="ph ph-caret-down chev" aria-hidden="true"></i>
+    </button>
+    <div class="store-detail" id="detail-${i}" hidden>
+      ${breakdown(r)}
+      <div class="detail-gifts">
+        <span class="gift-chip">${esc(r.giftLabel)} gift card <b>−${inr(r.gift)}</b></span>
+        ${r.extraGift ? `<span class="gift-chip">${esc(r.extraGift.name)} gift card <b>−${inr(extra)}</b></span>` : ""}
+      </div>
+      <p class="detail-cards">Card rewards instead: ${esc(cards)}.</p>
+      <div class="detail-actions">
+        <a class="btn btn-primary btn-sm" href="${giftUrl(r.giftLabel)}">Buy gift card</a>
+        <a class="btn btn-ghost btn-sm" href="#" aria-label="Open ${esc(r.name)} listing">Open ${esc(r.name)}<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </li>`;
+}).join("");
+
+list.addEventListener("click", e => {
+  const btn = e.target.closest(".store-btn");
+  if (!btn) return;
+  const open = btn.getAttribute("aria-expanded") === "true";
+  btn.setAttribute("aria-expanded", String(!open));
+  document.getElementById(btn.getAttribute("aria-controls")).hidden = open;
+});
+
+const moreBtn = document.getElementById("more-btn");
+const hiddenCount = Math.max(0, rows.length - VISIBLE);
+let expanded = false;
+function renderMore() {
+  moreBtn.innerHTML = expanded
+    ? 'Show fewer stores <i class="ph ph-caret-up" aria-hidden="true"></i>'
+    : `Show ${hiddenCount} more stores <i class="ph ph-caret-down" aria-hidden="true"></i>`;
+  moreBtn.setAttribute("aria-expanded", String(expanded));
+  [...list.children].forEach((li, i) => { if (i >= VISIBLE) li.hidden = !expanded; });
+}
+if (hiddenCount) renderMore(); else moreBtn.parentElement.remove();
+moreBtn.addEventListener("click", () => { expanded = !expanded; renderMore(); });
+
+// Theme toggle
+const themeBtn = document.getElementById("theme-toggle");
+function syncThemeIcon() {
+  const dark = document.documentElement.dataset.theme === "dark";
+  themeBtn.innerHTML = `<i class="ph ${dark ? "ph-sun" : "ph-moon"}" aria-hidden="true"></i>`;
+}
+themeBtn.addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("save8-prototype-theme", JSON.stringify(next)); } catch {}
+  syncThemeIcon();
+});
+syncThemeIcon();
+</script>
+</body>
+</html>

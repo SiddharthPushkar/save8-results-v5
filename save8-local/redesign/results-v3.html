@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Results light v3 · Save8</title>
+<style>
+@font-face{font-family:Inter;src:url(../samples/04-agentic/shared/assets/inter.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --page:#F7F4ED; --surface:#fff; --photo:#F4F4F6; --ink:#0E0F0C; --body:#454745; --muted:#6A6C6A;
+  --border:rgba(14,15,12,.12); --green:#007A45; --orange:#E6651A;
+  --chip:#D9E8FA; --chip-ink:#0F2D6F; --btn2:#D8E0F2; --link:#000B80;
+  --warn:#8A5A00; --red:#BF1E2C;
+}
+*{box-sizing:border-box;margin:0}
+body{background:#e9e5db;font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.phone{width:390px;max-width:100%;margin:0 auto;background:var(--page);min-height:100vh;position:relative;padding-bottom:96px}
+svg.i{display:block;flex:none}
+button{font:inherit;border:0;cursor:pointer;color:inherit;background:none}
+.hdr{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(14,15,12,.1);background:var(--page);min-height:61px}
+.menu{width:40px;height:40px;border-radius:999px;background:#fff;border:1px solid var(--border);display:grid;place-items:center}
+.loc{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.loc b{font-weight:500;font-size:13px;display:flex;gap:4px;align-items:center}
+.loc span{font-size:14px;color:var(--muted)}
+.content{padding:12px 8px 20px;display:flex;flex-direction:column;gap:12px}
+.h-sm{padding:4px 8px 0;font-size:14px;color:var(--muted)}
+.h-md{padding:4px 8px 0;font-size:15px;font-weight:500}
+.card{background:#fff;border:1px solid rgba(14,15,12,.13);border-radius:20px}
+.po{padding:10px;display:flex;flex-direction:column;gap:14px}
+.prod{display:flex;gap:10px;align-items:flex-start}
+.prod .img{width:96px;height:96px;border-radius:14px;border:1px solid rgba(14,15,12,.08);overflow:hidden;flex:none;background:#fff}
+.prod .img img{width:100%;height:100%;object-fit:contain}
+.prod .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.store-row{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:14px;font-weight:500}
+.store-row img{width:14px;height:14px;border-radius:4px}
+.pill{background:rgba(0,122,69,.12);color:var(--green);font-size:10px;font-weight:500;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.pill.lg{font-size:11px;width:fit-content}
+.ptitle{font-weight:600;font-size:14px}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chip{background:var(--chip);color:var(--chip-ink);font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px}
+.pnc{font-weight:700;font-size:14px;color:var(--body)}
+.sec{display:flex;justify-content:space-between;align-items:center;padding:0 2px;font-weight:600;font-size:14px;color:var(--body)}
+.sec .lnk{display:flex;align-items:center;gap:2px;font-weight:500;font-size:12px;color:var(--link)}
+.rail{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.tile{flex:none;width:230px;border:1px solid rgba(14,15,12,.11);border-radius:14px;padding:12px 10px;display:flex;flex-direction:column;gap:14px;background:#fff}
+.tile .top{display:flex;gap:8px;align-items:center;font-weight:600;font-size:14px}
+.tile .top img{width:30px;height:30px;border-radius:8px;border:1px solid rgba(14,15,12,.1);object-fit:contain;background:#fff}
+.tile .bot{display:flex;justify-content:space-between;align-items:center;color:var(--green);font-weight:600;font-size:13px}
+.rate{display:flex;align-items:center;gap:8px}.rate b{font-weight:700;font-size:15px}.rate i{font-style:normal;font-size:13px;font-weight:600;background:#EEF2FC;color:var(--chip-ink);padding:3px 8px;border-radius:8px;border:1px solid rgba(15,45,111,.08)}
+.buy{background:var(--btn2);color:var(--chip-ink);font-weight:600;font-size:13px;padding:6px 14px;border-radius:999px}
+.arrow{background:var(--btn2);color:var(--chip-ink);width:26px;height:26px;border-radius:999px;display:grid;place-items:center}
+.arrow svg{transform:rotate(90deg)}
+.hide{display:flex;justify-content:center;align-items:center;gap:4px;font-weight:500;font-size:14px}
+.lc{padding:12px;display:flex;flex-direction:column;gap:10px}
+.lc .top{display:flex;gap:8px;align-items:center}
+.lc .top>img{width:28px;height:28px;border-radius:8px;border:1px solid rgba(14,15,12,.1);object-fit:cover}
+.lc .name{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.lc .name b{font-size:15px;font-weight:700;max-width:100%}
+.pbtn{background:var(--orange);color:#fff;font-weight:700;font-size:15px;padding:6px 12px 6px 14px;border-radius:999px;display:flex;gap:6px;align-items:center}
+.right{display:flex;gap:8px;align-items:center}
+.oos{color:var(--red);font-size:10px;font-weight:600;text-align:right;line-height:1.2}
+.hint{flex:none;font-size:10px;color:var(--muted);text-align:right;line-height:1.2}
+.allow{background:var(--btn2);color:var(--chip-ink);font-weight:700;font-size:11px;padding:6px 10px;border-radius:999px;display:flex;gap:6px;align-items:center}
+.save{display:flex;gap:6px;justify-content:center;align-items:center;color:var(--green);font-size:12px;font-weight:500}
+.save b{font-weight:700}
+.hdr2{display:flex;justify-content:space-between;align-items:center;padding:4px 8px 0}
+.hdr2 .lnk{display:flex;align-items:center;gap:2px;color:var(--link);font-weight:600;font-size:13px}
+.car{display:flex;gap:10px;overflow-x:auto;padding-right:16px;align-items:flex-start;scroll-snap-type:x proximity;scrollbar-width:none}
+.car::-webkit-scrollbar{display:none}
+.sc{flex:none;width:265px;scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:20px;padding:10px 10px 12px;display:flex;flex-direction:column;gap:8px}
+.sc .ph{height:178px;border-radius:14px;background:var(--photo);flex:none}
+.sc .ph img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;border-radius:14px}
+.sc .st{display:flex;gap:6px;align-items:center;padding-top:2px;font-size:14px;font-weight:500;color:var(--body)}
+.sc .st img{width:28px;height:28px;border-radius:6px;border:1px solid rgba(14,15,12,.1);object-fit:cover}
+.sc .st span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.sc .nm{font-weight:600;font-size:14px;line-height:18px;height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.specs{display:flex;flex-wrap:wrap;gap:4px}
+.sp{font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--chip);color:var(--chip-ink)}
+.sp.warn{background:rgba(184,124,0,.12);color:var(--warn)}
+.sp.red{background:rgba(191,30,44,.1);color:var(--red)}
+.sp.miss{background:rgba(14,15,12,.06);color:var(--muted);font-weight:500}
+.pr{padding-top:2px;font-weight:700;font-size:20px}
+.pr.soft{font-weight:600;font-size:14px;color:var(--muted)}
+.pr.off{color:var(--muted)}
+.pr.wrong{text-decoration:line-through;color:var(--muted)}
+.cta{display:flex;gap:6px;align-items:center;justify-content:center;padding:10px;border-radius:999px;background:var(--orange);color:#fff;font-weight:600;font-size:13px}
+.cta.grey{background:transparent;border:1px solid var(--border);color:var(--body)}
+.cta.loc2{background:var(--btn2);color:var(--chip-ink)}
+.oc{flex:none;width:313px;scroll-snap-align:start;background:#fff;border:1px solid rgba(14,15,12,.13);border-radius:20px;padding:10px;display:flex;flex-direction:column;gap:14px}
+.oc .ph{aspect-ratio:1;border-radius:14px;background:var(--photo)}
+.oc .ph img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;border-radius:14px}
+.oc .info{display:flex;flex-direction:column;gap:6px;margin-top:-4px}
+.oc .store-row{gap:8px}
+.oc .store-row img{width:28px;height:28px;border-radius:7px;border:1px solid rgba(14,15,12,.1);object-fit:cover;flex:none}
+.oc .store-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.oc .sp{font-size:10px;padding:2px 7px;border-radius:6px}
+.oc .pr{padding-top:0;font-size:18px;line-height:24px}
+.oc .pr.soft{font-size:14px;line-height:24px;color:var(--body)}
+.oc .pr.wrong{color:var(--warn)}
+.oc .cta{font-size:14px}
+.oc .tile .bot .pct{font-weight:600;font-size:13px}
+.save,.sv{cursor:pointer}
+.sv{display:flex;gap:4px;align-items:center;justify-content:center;padding:8px;border-radius:999px;background:rgba(0,122,69,.06);border:1px solid rgba(0,122,69,.45);color:var(--green);font-weight:600;font-size:12px}
+.sheet-bd{position:fixed;inset:0;background:rgba(14,15,12,.4);opacity:0;pointer-events:none;transition:opacity .25s;z-index:20}
+.sheet{position:fixed;bottom:0;left:50%;width:min(390px,100%);max-height:86vh;background:var(--page);border-radius:24px 24px 0 0;transform:translate(-50%,100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);z-index:21;display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(14,15,12,.18)}
+body.sheet-open .sheet-bd{opacity:1;pointer-events:auto}
+body.sheet-open .sheet{transform:translate(-50%,0)}
+body.sheet-open{overflow:hidden}
+.sheet .grab{width:40px;height:4px;border-radius:99px;background:rgba(14,15,12,.2);margin:10px auto 0;flex:none}
+.sheet .sh-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px}
+.sheet .sh-head img{width:36px;height:36px;border-radius:10px;border:1px solid rgba(14,15,12,.1);object-fit:cover}
+.sheet .sh-head div{flex:1;min-width:0}
+.sheet .sh-head b{display:block;font-size:16px;font-weight:700}
+.sheet .sh-head span{font-size:13px;color:var(--muted)}
+.sheet .x{width:32px;height:32px;border-radius:99px;background:#fff;border:1px solid var(--border);display:grid;place-items:center}
+.sheet .sh-body{overflow-y:auto;padding:0 16px 24px;display:flex;flex-direction:column;gap:10px}
+.sheet h3{font-size:14px;font-weight:600;color:var(--body);margin:6px 2px 0}
+.offer{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(14,15,12,.11);border-radius:14px;padding:10px 12px}
+.offer img,.offer .ltr{width:34px;height:34px;border-radius:9px;border:1px solid rgba(14,15,12,.1);object-fit:contain;background:#fff;flex:none}
+.offer .ltr{display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--chip-ink);background:var(--chip)}
+.offer .t{flex:1;min-width:0;font-weight:600;font-size:14px}
+.offer .t small{display:block;margin-top:3px;font-size:12px;font-weight:400;color:var(--muted)}
+.offer .amt{display:flex;flex-direction:column;align-items:flex-end;gap:3px;color:var(--green);font-weight:700;font-size:15px}
+.offer .amt i{font-style:normal;font-size:12px;font-weight:600;background:#EEF2FC;color:var(--chip-ink);padding:2px 7px;border-radius:7px;border:1px solid rgba(15,45,111,.08)}
+.sheet .note{font-size:11px;color:var(--muted);margin:2px 2px 0}
+.pblur{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(390px,100%);height:120px;pointer-events:none}
+.pblur i{position:absolute;inset:0}
+.pblur i:nth-child(1){backdrop-filter:blur(.5px);-webkit-backdrop-filter:blur(.5px);mask-image:linear-gradient(to top,#000 0,#000 25%,transparent 50%);-webkit-mask-image:linear-gradient(to top,#000 0,#000 25%,transparent 50%)}
+.pblur i:nth-child(2){backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);mask-image:linear-gradient(to top,#000 0,#000 18%,transparent 40%);-webkit-mask-image:linear-gradient(to top,#000 0,#000 18%,transparent 40%)}
+.pblur i:nth-child(3){backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);mask-image:linear-gradient(to top,#000 0,#000 12%,transparent 32%);-webkit-mask-image:linear-gradient(to top,#000 0,#000 12%,transparent 32%)}
+.pblur i:nth-child(4){backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);mask-image:linear-gradient(to top,#000 0,#000 8%,transparent 22%);-webkit-mask-image:linear-gradient(to top,#000 0,#000 8%,transparent 22%)}
+.pblur::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(247,244,237,.75),rgba(247,244,237,0) 85%)}
+.dock{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:calc(min(390px,100%) - 32px);height:52px;padding:0 6px 0 18px;display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:999px;box-shadow:0 8px 24px rgba(14,15,12,.14),0 2px 6px rgba(14,15,12,.08)}
+.dock input{flex:1;min-width:0;height:100%;border:0;background:transparent;font:14px Inter,sans-serif;color:var(--ink);outline:none}
+.dock input::placeholder{color:var(--muted)}
+.dock button{flex:none;width:40px;height:40px;border-radius:999px;background:var(--orange);color:#fff;display:grid;place-items:center;opacity:.45}
+.dock input:not(:placeholder-shown)+button{opacity:1}
+</style>
+</head>
+<body>
+<div class="phone" id="app"></div>
+<script>
+const A = "../../save8-assets/";
+const ICONS = {"card-offer-arrow": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12.2287\" height=\"13.714\" viewBox=\"0 0 12.2287 13.714\" fill=\"none\"><path d=\"M12.2287 5.8853L6.51333 0.1713C6.46172 0.117166 6.39966 0.0740715 6.3309 0.0446268C6.26215 0.0151821 6.18813 0 6.11333 0C6.03854 0 5.96452 0.0151821 5.89577 0.0446268C5.82701 0.0740715 5.76495 0.117166 5.71333 0.1713L0 5.8853L0.8 6.6853L5.54267 1.94263V13.714H6.686V1.9433L11.4287 6.68597L12.2287 5.8853Z\" fill=\"currentColor\"/></svg>", "chevron-down-thin": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m19.5 8.25-7.5 7.5-7.5-7.5\"/></svg>", "chevron-down": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M6 9l6 6 6-6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "chevron-right-thin": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m8.25 4.5 7.5 7.5-7.5 7.5\"/></svg>", "chevron-right": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M9 6l6 6-6 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "chevron-up": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M6 15l6-6 6 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "close": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6 18 18 6M6 6l12 12\"/></svg>", "external-link": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>", "location-pin": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"/><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z\"/></svg>", "menu": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5\"/></svg>", "more-horizontal": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z\"/></svg>", "send-arrow-up": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path fill-rule=\"evenodd\" d=\"M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z\" clip-rule=\"evenodd\"/></svg>", "share": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z\"/></svg>"};
+const ic = (n, s) => ICONS[n].replace("<svg", `<svg class="i" width="${s}" height="${s}"`);
+const logo = f => A + "logos/stores/" + f + ".png";
+const phone = c => A + "products/apple-iphone-15-128gb-" + c + ".jpg";
+const BASE = 74900; // reference price (₹) used to estimate offer savings on the tiles
+const rs = n => "₹" + n.toLocaleString("en-IN");
+
+const bestPrices = [
+  {n:"BigBasket", l:"bigbasket", loc:true, save:2396, via:"gift cards & card rewards"},
+  {n:"Vijay Sales", l:"vijaysales", price:59900, sale:"Grand Electronics Sale · live", save:1198, via:"gift cards & card rewards"},
+  {n:"Great Eastern Retail", l:"greateastern", price:64900, save:3245, via:"card rewards"},
+  {n:"Croma", l:"croma", price:74900, sale:"Festival of Dreams · live", save:1685, via:"gift cards & card rewards"},
+  {n:"Imagine", l:"imagine", price:74900, save:3745, via:"card rewards"},
+  {n:"Poorvika", l:"poorvika", price:74900, save:3745, via:"card rewards"},
+  {n:"Vasanth & Co", l:"vasanth", price:74900, save:3745, via:"card rewards"},
+  {n:"Zepto", l:"zepto", loc:true, save:2276, via:"gift cards & card rewards"},
+  {n:"Reliance Digital", l:"reliancedigital", price:59900, oos:true, sale:"Festival of Electronics · live", save:599, via:"gift cards & card rewards"},
+  {n:"Swiggy Instamart", l:"instamart", loc:true, sale:"Quick India Movement · live", save:2995, via:"card rewards"},
+];
+const S = {m:t=>[t,""], w:t=>[t,"warn"], r:t=>[t,"red"], x:t=>[t,"miss"]};
+const other = [
+  {n:"Inspireonline", l:"inspireonline", c:"black", t:"iPhone 15 128GB Black", sp:[S.m("128 GB"),S.m("Black")], p:64900, sv:"Save ₹3,245 more"},
+  {n:"Bigcmobiles", l:"bigcmobiles", c:"black", t:"iPhone 15 128GB Black", sp:[S.m("128 GB"),S.m("Black")], soft:"Price on site", btn:"View price", sv:"Save up to 5% more"},
+  {n:"Myg", l:"myg", c:"black", t:"Apple iPhone 15 | 128GB | Black", sp:[S.m("128 GB"),S.m("Black")], soft:"Price on site", btn:"View price", sv:"Save up to 5% more"},
+  {n:"iPlanet", l:"iplanet", c:"black", t:"Apple iPhone 15 (128 GB) - Black", sp:[S.r("Out of stock"),S.m("128 GB"),S.m("Black")], p:57504, off:true, grey:true, sv:"Save ₹2,875 more"},
+  {n:"Sathya Mobiles", l:"sathyamobiles", c:"pink", t:"Apple iPhone 15 (128 GB) - Pink", sp:[S.m("128 GB"),S.w("⚠ Pink")], p:54900, sv:"Save ₹2,745 more"},
+  {n:"Flipkart", l:"flipkart", c:"blue", t:"Apple iPhone 15 (128 GB) - Blue", sp:[S.m("128 GB"),S.w("⚠ Blue")], p:67999, sv:"Save ₹1,360 more"},
+  {n:"iVenus", l:"ivenus", c:"black", t:"iPhone 15", sp:[S.x("Storage & color not listed")], p:66900, sv:"Save ₹3,345 more"},
+  {n:"Girias", l:"girias", c:"pink", t:"Apple iPhone 15 (128 GB) - Pink", sp:[S.m("128 GB"),S.w("⚠ Pink")], p:89900, sv:"Save ₹1,798 more"},
+  {n:"Sathya", l:"sathya", c:"blue", t:"Apple iPhone 15 (128 GB) - Blue", sp:[S.m("128 GB"),S.w("⚠ Blue")], soft:"Price on site", btn:"View price", sv:"Save 2% more"},
+  {n:"Shopsy", l:"shopsy", c:"black", t:"Apple iPhone 15 (128 GB) - Black", sp:[S.w("Price looks wrong"),S.r("Out of stock"),S.m("128 GB")], p:5000, wrong:true, grey:true, sv:"Save ₹250 more"},
+  {n:"JioMart", l:"jiomart", c:"black", t:"Apple iPhone 15 (128 GB) - Black", sp:[S.w("Price looks wrong"),S.m("128 GB"),S.m("Black")], soft:"Needs location", loc:true, sv:"Save ₹230 more"},
+];
+
+const tile = (img, name, rate, arrow) => `<div class="tile"><div class="top"><img src="${A}logos/${img}" alt=""><span>${name}</span></div>
+  <div class="bot"><span class="rate"><b>-${rs(Math.round(BASE*parseFloat(rate)/100))}</b><i>${rate.replace(" Off","")} off</i></span>${arrow ? `<span class="arrow">${ic("card-offer-arrow",12)}</span>` : `<button class="buy">Buy</button>`}</div></div>`;
+
+const listCard = s => {
+  const right = s.loc
+    ? `<div class="right"><div class="hint">For price &amp;<br>availability</div><button class="allow">${ic("location-pin",14)}Allow location${ic("chevron-right",14)}</button></div>`
+    : `<div class="right">${s.oos ? `<div class="oos">Out Of<br>Stock</div>` : ""}<button class="pbtn">${rs(s.price)}${ic("external-link",14)}</button></div>`;
+  return `<div class="card lc"><div class="top"><img src="${logo(s.l)}" alt="">
+    <div class="name"><b>${s.n}</b>${s.sale ? `<span class="pill lg">${s.sale}</span>` : ""}</div>${right}</div>
+    <div class="save" data-open="best:${s.n}"><span>Save <b>${rs(s.save)}</b> more with ${s.via}.</span>${ic("chevron-down",17)}</div></div>`;
+};
+
+const GIFT = [["amazon-fresh","Amazon Fresh",2],["amazon-shopping","Amazon shopping",1.75],["amazon-pay","Amazon Pay",1.25]];
+const CARDS = [["icici-amazon-pay","Amazon Pay ICICI Card","5% / 3%",5],["sbi-card","Cashback SBI Card","5%",5],["standard-chartered","StanC Smart Credit Card","2%",2],["axis","Axis ACE Card","1.5%",1.5],[null,"YES Klick Card","1.5%",1.5]];
+// Variant: ?variant=no-save hides the green "Save ₹X more" button on the other-store cards
+const NO_SAVE = new URLSearchParams(location.search).get("variant") === "no-save";
+if (NO_SAVE) document.title = "Results light v3 (no Save button) · Save8";
+// Offer-style card for "Also found on other stores" (Figma 64:2403): product, store button, gift card + payment offer rails
+const offerTile = (img, name, label, arrow) => `<div class="tile"><div class="top"><img src="${A}logos/${img}" alt=""><span>${name}</span></div>
+  <div class="bot"><span class="pct">${label} Off</span>${arrow ? `<span class="arrow">${ic("card-offer-arrow",12)}</span>` : `<button class="buy">Buy</button>`}</div></div>`;
+const offerCard = s => {
+  const price = s.p ? `<div class="pr ${s.wrong?"wrong":s.off?"off":""}">${rs(s.p)}</div>` : `<div class="pr soft">${s.soft}</div>`;
+  const cta = s.loc ? `<button class="cta loc2">${ic("location-pin",14)}Allow location</button>`
+    : s.grey ? `<button class="cta grey">Open store ${ic("external-link",13)}</button>`
+    : `<button class="cta">${s.btn || "Open store"} ${ic("external-link",13)}</button>`;
+  return `<div class="oc">
+    <div class="ph"><img src="${phone(s.c)}" alt=""></div>
+    <div class="info">
+      <div class="store-row"><img src="${logo(s.l)}" alt=""><span>${s.n}</span></div>
+      <div class="ptitle">${s.t}</div>
+      <div class="specs">${s.sp.map(([t,k])=>`<span class="sp ${k}">${t}</span>`).join("")}</div>
+      ${price}
+    </div>
+    ${cta}
+    ${NO_SAVE ? "" : `<button class="sv" data-open="other:${s.n}">${s.sv} ${ic("chevron-right",12)}</button>`}
+    <div class="sec"><span>Gift Card Offers</span>${ic("chevron-right",16)}</div>
+    <div class="rail">${[GIFT[1], GIFT[0], GIFT[2]].map(([f,n,r]) => offerTile(`gift-cards/${f}.png`, n, r + "%")).join("")}</div>
+    <div class="sec"><span>Payment Offers</span><span class="lnk">Add Cards ${ic("chevron-right",14)}</span></div>
+    <div class="rail">${CARDS.slice(0,3).map(([f,n,l,r]) => offerTile(`banks/${f}.png`, n, l, 1)).join("")}</div>
+  </div>`;
+};
+
+const storeCard = s => {
+  const price = s.p ? `<div class="pr ${s.wrong?"wrong":s.off?"off":""}">${rs(s.p)}</div>` : `<div class="pr soft">${s.soft}</div>`;
+  const cta = s.loc ? `<button class="cta loc2">Allow location</button>`
+    : s.grey ? `<button class="cta grey">Open store ${ic("external-link",13)}</button>`
+    : `<button class="cta">${s.btn || "Open store"} ${ic("external-link",13)}</button>`;
+  return `<div class="sc"><div class="ph"><img src="${phone(s.c)}" alt=""></div>
+    <div class="st"><img src="${logo(s.l)}" alt=""><span>${s.n}</span></div>
+    <div class="nm">${s.t}</div>
+    <div class="specs">${s.sp.map(([t,k])=>`<span class="sp ${k}">${t}</span>`).join("")}</div>
+    ${price}${cta}
+    <button class="sv" data-open="other:${s.n}">${s.sv} ${ic("chevron-right",12)}</button></div>`;
+};
+
+document.getElementById("app").innerHTML = `
+<header class="hdr">
+  <button class="menu" aria-label="Menu">${ic("menu",20)}</button>
+  <div class="loc"><b>Showing prices for ${ic("chevron-down-thin",14)}</b><span>Set your location</span></div>
+  <button aria-label="More">${ic("more-horizontal",24)}</button>
+</header>
+<main class="content">
+  <div class="h-sm">Found the best offers for Amazon</div>
+  <section class="card po">
+    <div class="prod">
+      <div class="img"><img src="${phone("black")}" alt="iPhone 15 Black"></div>
+      <div class="info">
+        <div class="store-row"><img src="${logo("amazon")}" alt=""><span>Amazon</span><span class="pill">Great Indian Festival (GIF) · live</span></div>
+        <div class="ptitle">Apple iPhone 15 (128 GB) - Black</div>
+        <div class="chips"><span class="chip">128 GB</span><span class="chip">Black</span><span class="chip">iPhone 15</span></div>
+        <div class="pnc">Price not confirmed</div>
+      </div>
+      ${ic("chevron-right",20)}
+    </div>
+    <div class="sec"><span>Gift Card Offers</span>${ic("chevron-right",16)}</div>
+    <div class="rail">
+      ${tile("gift-cards/amazon-shopping.png","Amazon shopping","1.75% Off")}
+      ${tile("gift-cards/amazon-fresh.png","Amazon Fresh","2% Off")}
+      ${tile("gift-cards/amazon-pay.png","Amazon Pay","1.25% Off")}
+    </div>
+    <div class="sec"><span>Payment Offers</span><span class="lnk">Add Cards ${ic("chevron-right",14)}</span></div>
+    <div class="rail">
+      ${tile("banks/icici-amazon-pay.png","Amazon Pay ICICI Card","5% / 3% Off",1)}
+      ${tile("banks/sbi-card.png","Cashback SBI Card","5% Off",1)}
+      ${tile("banks/standard-chartered.png","StanC Smart Credit Card","2% Off",1)}
+    </div>
+    <button class="hide">Hide offer ${ic("chevron-up",17)}</button>
+  </section>
+  <div class="h-md">Here are the best prices I found</div>
+  ${bestPrices.map(listCard).join("")}
+  <div class="hdr2"><div class="h-md" style="padding:0">Also found on other stores</div></div>
+  <div class="car">${other.map(offerCard).join("")}</div>
+</main>
+<div class="pblur"><i></i><i></i><i></i><i></i></div><div class="dock"><input placeholder="Paste a new product URL to compare" aria-label="Product URL"><button aria-label="Send">${ic("send-arrow-up",20)}</button></div>`;
+
+const sheetEl = document.createElement("div");
+sheetEl.innerHTML = `<div class="sheet-bd" data-close></div><div class="sheet" role="dialog" aria-modal="true" aria-label="Ways to save"></div>`;
+document.body.append(...sheetEl.children);
+const sheet = document.querySelector(".sheet");
+const openSheet = key => {
+  const [kind, name] = [key.slice(0, key.indexOf(":")), key.slice(key.indexOf(":") + 1)];
+  const st = (kind === "best" ? bestPrices : other).find(x => x.n === name);
+  const price = st.price || st.p || null;
+  const amt = r => price ? "-" + rs(Math.round(price * r / 100)) : "Up to";
+  sheet.innerHTML = `<div class="grab"></div>
+  <div class="sh-head"><img src="${logo(st.l)}" alt=""><div><b>Ways to save at ${st.n}</b><span>${price ? "Store price " + rs(price) : "Price shown on the store site"}</span></div><button class="x" data-close aria-label="Close">${ic("close",18)}</button></div>
+  <div class="sh-body">
+    <h3>Gift card offers</h3>
+    ${GIFT.map(([f,n,r]) => `<div class="offer"><img src="${A}logos/gift-cards/${f}.png" alt=""><div class="t">${n}<small>Buy a gift card, pay with it at checkout</small></div><div class="amt"><span>${amt(r)}</span><i>${r}% off</i></div><button class="buy">Buy</button></div>`).join("")}
+    <h3>Payment offers</h3>
+    ${CARDS.map(([f,n,l,r]) => `<div class="offer">${f ? `<img src="${A}logos/banks/${f}.png" alt="">` : `<span class="ltr">Y</span>`}<div class="t">${n}<small>On eligible card payments</small></div><div class="amt"><span>${amt(r)}</span><i>${l} off</i></div></div>`).join("")}
+    <p class="note">${price ? "Savings are estimated on the store price and may change." : "Rates shown; the saving depends on the final price."} Offers can have caps and conditions.</p>
+  </div>`;
+  document.body.classList.add("sheet-open");
+  sheet.querySelector(".sh-body").scrollTop = 0;
+};
+const closeSheet = () => document.body.classList.remove("sheet-open");
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-close]")) return closeSheet();
+  const t = e.target.closest("[data-open]");
+  if (t) openSheet(t.dataset.open);
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
+</script>
+</body>
+</html>
