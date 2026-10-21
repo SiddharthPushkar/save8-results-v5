@@ -33,7 +33,8 @@ a{color:inherit;text-decoration:none}
 @media(min-width:600px){.app{box-shadow:0 0 0 1px rgba(14,15,12,.08),0 30px 80px -30px rgba(14,15,12,.35)}}
 
 /* Header */
-.hdr{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--page);border-bottom:1px solid rgba(14,15,12,.10)}
+.hdr{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--page);box-shadow:0 0 0 rgba(60,48,20,0);transition:box-shadow .2s ease}
+.hdr.scrolled{box-shadow:0 4px 12px -6px rgba(60,48,20,.22)}
 .circle-btn{width:40px;height:40px;border-radius:999px;background:#fff;border:0;display:grid;place-items:center;flex:none}
 .circle-btn svg{width:20px;height:20px}
 .loc{flex:1;min-width:0;text-align:left;display:flex;flex-direction:column;gap:1px}
@@ -89,7 +90,7 @@ main{flex:1;padding:12px 8px 12px;display:flex;flex-direction:column;gap:12px}
 
 /* Gift card tile (horizontal) */
 .gc{width:251px;display:flex;gap:10px;padding:8px;background:#fff;border:1px solid var(--tile-line);border-radius:12px}
-.gc .art{width:70px;height:78px;border-radius:8px;overflow:hidden;flex:none;border:1px solid rgba(14,15,12,.08)}
+.gc .art{width:70px;height:78px;border-radius:8px;overflow:hidden;flex:none}
 .gc .art img{width:100%;height:100%;object-fit:cover}
 .gc .d{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
 .gc .m{font-size:12px;font-weight:600;line-height:16px;color:#172637;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -353,6 +354,11 @@ document.addEventListener("click", e => {
   clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2200);
 });
 document.getElementById("locBtn").addEventListener("click", () => { toast.textContent = "Location picker would open here."; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2200); });
+
+// Header: soft shadow only after the page has scrolled
+const hdr = document.querySelector(".hdr");
+const onScroll = () => hdr.classList.toggle("scrolled", window.scrollY > 4);
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
 // Composer: send turns solid when there is text
 const url = document.getElementById("url"), send = document.getElementById("send");
